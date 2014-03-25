@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreateTimesheetsTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+        Schema::create('timesheets', function(Blueprint $table) {
+            $table->increments('id');
+            $table->date('week_ends');
+            $table->date('week_starts');
+            $table->integer('user');
+			$table->timestamps();
+        });
+	}
+
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+	    Schema::drop('timesheets');
+	}
+
+}
