@@ -28,7 +28,7 @@ $env = $app->detectEnvironment(array(
 
 	'local' => array('Uriel'),
     'c9' => array('c9'),
-    'devbox' => array('devbox.home'),
+    'devbox' => array('devbox.home','devbox.harvsworld.com'),
 
 ));
 

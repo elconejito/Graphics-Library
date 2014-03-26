@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
-@section('meta_description', 'Little Rabbit Studios')
-@section('meta_title', 'Little Rabbit Studios')
+@section('meta_description', 'Graphics Library')
+@section('meta_title', 'Graphics Library')
 
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->

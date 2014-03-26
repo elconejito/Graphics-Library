@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
-@section('meta_description', 'Page Name :: Little Rabbit Studios')
-@section('meta_title', 'Page Name :: Little Rabbit Studios')
+@section('meta_description', 'Page Name :: Graphics Library')
+@section('meta_title', 'Page Name :: Graphics Library')
 
 @section('content')
 <div class="container">

@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
-@section('meta_description', 'Confirmation :: Cyclone Business Solutions')
-@section('meta_title', 'Confirmation :: Cyclone Business Solutions')
+@section('meta_description', 'Confirmation :: Graphics Library')
+@section('meta_title', 'Confirmation :: Graphics Library')
 
 @section('content')
 	<div class="container">
