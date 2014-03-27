@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Projects Create!</h1>
+            <h1>Add New Project</h1>
         </div>
     </div>
     
@@ -45,6 +45,12 @@
                     {{ Form::text('control_prefix', Input::old('control_prefix'), array('class' => 'form-control', 'placeholder'=>'Control Prefix')) }}
                 </div>
             </div>
+            <div class="form-group @if($errors->first('control_prefix'))has-error@endif">
+                {{ Form::label('control_prefix','Control Prefix', array('class' => 'control-label col-md-2')) }}
+                <div class="col-md-10">
+                    {{ Form::text('control_prefix', Input::old('control_prefix'), array('class' => 'form-control', 'placeholder'=>'Control Prefix')) }}
+                </div>
+            </div>
             <div class="form-group">
             	<div class="col-sm-offset-2 col-sm-10">
             		{{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
@@ -54,7 +60,6 @@
             {{ Form::close() }}
         </div>
         <div class="col-md-4">
-            <p>Create a new Project.</p>
         </div>
     </div>
 </div>

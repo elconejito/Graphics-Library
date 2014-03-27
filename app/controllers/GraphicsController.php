@@ -57,6 +57,7 @@ class GraphicsController extends \BaseController {
         // process the image
         $image = Image::make(Input::file('image')->getRealPath());
         $save_path = $project->getGraphicFolderPath();
+        // #TODO find a better cleaner regex
         $save_name = $data['control_number'].'_'.preg_replace('/^((?![A-Za-z0-9_]).)*$/', '_', $data['title']). '.' .Input::file('image')->getClientOriginalExtension();
         // in order, save the fullsize > main > thumbnail
         $image->save($save_path . 'fullsize/' . $save_name)

@@ -51,9 +51,11 @@ Route::get('/contact', function()
  * Routes to resources
  *
  */
-
+Route::resource('clients', 'ClientsController');
+Route::resource('tags', 'TagsController');
 Route::resource('projects', 'ProjectsController');
 Route::resource('projects.graphics', 'GraphicsController');
+Route::resource('projects.covers', 'CoversController');
 
 /*
  * Routes to controllers
