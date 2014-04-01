@@ -8,34 +8,63 @@
     <div class="row">
         <div class="col-md-12">
             <p>breadcrumbs</p>
-            <h1>Projects</h1>
-            <p>{{ link_to_action('ProjectsController@create', 'add new project') }}</p>
+            <h1>All Projects</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 table-responsive">
+        <div class="col-md-8">
             @if ( $projects )
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Project Name</th>
-                        <th># of Graphics</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ( $projects as $project )
-                    <tr>
-                        <td>{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</td>
-                        <td>0</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="navigation">
+                <ul class="pagination pagination-sm pull-right">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+                <p>{{ count($projects) }} projects</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th># of Graphics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ( $projects as $project )
+                        <tr>
+                            <td>{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</td>
+                            <td>0</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             @else
             <p>no projects yet.</p>
             @endif
         </div>
         <div class="col-md-4">
+            <nav class="navbar navbar-default toolbar" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="navbar-text">Tools</span>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ action('ProjectsController@create') }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> project</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Search / Filters</h3>

@@ -70,8 +70,9 @@ class ProjectsController extends \BaseController {
 	{
 	    $project = Project::findOrFail($id);
 	    $graphics = Graphic::where('project_id','=',$id)->take(6)->get();
+	    $cover = Cover::where('project_id','=',$id)->first();
 
-	    return View::make('projects.show', compact('project','graphics'));
+	    return View::make('projects.show', compact('project','graphics','cover'));
 	}
 
 	/**

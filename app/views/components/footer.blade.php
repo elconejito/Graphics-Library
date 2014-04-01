@@ -1,5 +1,5 @@
-    <div class="container">
-		<footer>
-			<p>Footer</p>
-		</footer>
-	</div>  <!-- /container -->
+	<footer>
+        <div class="container">
+			<p>env is {{ App::environment() }}</p>
+    	</div>  <!-- /container -->
+	</footer>

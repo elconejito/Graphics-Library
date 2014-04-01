@@ -9,14 +9,21 @@
         <div class="col-md-12">
             <p>breadcrumbs</p>
             <h1>Project: {{ $project->name }}</h1>
-            <p>details here</p>
-            <p>{{ link_to_action('GraphicsController@create', 'add graphic to this project', array('project_id'=>$project->id)) }}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8">
             @if ( count($graphics) > 0 )
-            <p>{{ link_to_action('GraphicsController@index', 'view all graphics', array('project_id'=>$project->id)) }}</p>
+            <div class="navigation">
+                <ul class="pagination pagination-sm pull-right">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+                <p>{{ count($graphics) }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
+            </div>
                 @foreach ( $graphics as $graphic )
             <div class="col-md-4">
                 <div class="thumbnail">
@@ -32,13 +39,55 @@
             </div>
                 @endforeach
             @else
-            <div class="col-md-12">
-                <p>Sorry, there are no graphics here</p>
-            </div>
+            <p>Sorry, there are no graphics here</p>
             @endif
         </div>
         <div class="col-md-4">
-            <p>cover</p>
+            <nav class="navbar navbar-default toolbar" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="navbar-text">Tools</span>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ action('GraphicsController@create',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> graphic</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Information</h3>
+                </div>
+                <div class="panel-body">
+                    <p>desc</p>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">Date Submitted: {{ $project->submit_date }}</li>
+                    <li class="list-group-item">Win/Loss: {{ $project->arWinLoss[$project->winloss] }}</li>
+                    <li class="list-group-item">Agency</li>
+                    <li class="list-group-item">Tags</li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Proposal Cover</h3>
+                </div>
+                <div class="panel-body">
+                    @if ( $cover )
+                    <img src="{{ asset($cover->getImageThumbnailPath()) }}" alt="{{ $project->name }}" class="img-responsive">
+                    @else
+                    <p>Sorry, there is no cover.</p>
+                    <p>{{ link_to_action('CoversController@create', 'add cover to this project', array('project_id'=>$project->id)) }}</p>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>

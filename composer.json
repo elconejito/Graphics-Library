@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"twbs/bootstrap": "3.1.*",
-        "doctrine/dbal": "2.*"
+        "doctrine/dbal": "2.*",
+        "intervention/image": "dev-master"
 	},
     "require-dev": {
         "way/generators": "2.*"

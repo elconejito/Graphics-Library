@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-md-8">
-            <img src="{{ asset($graphic->getImageMainPath()) }}" alt="{{ $graphic->title }}" id="graphic-full" class="img-responsive img-thumbnail">
+            <img src="{{ asset($graphic->getImageMainPath()) }}" alt="{{ $graphic->title }}" class="img-responsive img-thumbnail graphic-full">
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">

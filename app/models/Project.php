@@ -1,16 +1,23 @@
 <?php
 
 class Project extends \Eloquent {
+    public $arWinLoss = [
+        "0" => "Unknown",
+        "1" => "Win",
+        "2" => "Loss"
+        ];
 
     // Add your validation rules here
     public static $rules = [
         'name' => 'required',
         'control_prefix' => 'required|alpha_num',
-        'shortname' => 'required'
+        'shortname' => 'required',
+        'submit_date' => 'date',
+        'winloss' => 'integer'
     ];
 
     // Don't forget to fill this array
-    protected $fillable = ['name','control_prefix','shortname','graphicsfolder'];
+    protected $fillable = ['name','control_prefix','shortname','graphicsfolder','submit_date','winloss'];
     
     public function getGraphicFolderPath() {
         // get the root for this project
