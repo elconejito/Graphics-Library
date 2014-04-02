@@ -14,12 +14,20 @@ class GraphicsController extends \BaseController {
     public function __construct()
     {
         $this->beforeFilter('auth');
+
+        Breadcrumbs::addCrumb('Dashboard', '/gl');
+        Breadcrumbs::setCssClasses('breadcrumb');
+        Breadcrumbs::setDivider(null);
     }
     
 	public function index($project_id)
 	{
 	    $project = Project::findorfail($project_id);
 	    $graphics = Graphic::where('project_id','=',$project_id)->get();
+
+        // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
+        Breadcrumbs::addCrumb('All Graphics');
 
 	    return View::make('graphics.index', compact('graphics','project'));
 	}
@@ -33,6 +41,12 @@ class GraphicsController extends \BaseController {
 	public function create($project_id)
 	{
 	    $project = Project::findorfail($project_id);
+
+        // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
+        Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
+        Breadcrumbs::addCrumb('Add Graphic');
+
         return View::make('graphics.create', compact('project'));
 	}
 
@@ -84,6 +98,11 @@ class GraphicsController extends \BaseController {
 	{
 	    $graphic = Graphic::findOrFail($id);
         $project = Project::findorfail($project_id);
+
+        // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
+        Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
+        Breadcrumbs::addCrumb($graphic->control_number);
 
 	    return View::make('graphics.show', compact('graphic','project'));
 	}

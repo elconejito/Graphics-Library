@@ -7,6 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            {{ Breadcrumbs::render() }}
             <h1>Add Graphic<br /><small>for project {{ $project->name }}</small></h1>
         </div>
     </div>

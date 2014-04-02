@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <p>breadcrumbs</p>
+            {{ Breadcrumbs::render() }}
             <h1>Project: {{ $project->name }}</h1>
         </div>
     </div>
@@ -56,6 +56,7 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ action('GraphicsController@create',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> graphic</a></li>
+                            <li><a href="{{ action('CoversController@create', ['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> cover</a></li>
                         </ul>
                     </div>
                 </div>
@@ -68,10 +69,11 @@
                     <p>desc</p>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item">Date Submitted: {{ $project->submit_date }}</li>
-                    <li class="list-group-item">Win/Loss: {{ $project->arWinLoss[$project->winloss] }}</li>
-                    <li class="list-group-item">Agency</li>
-                    <li class="list-group-item">Tags</li>
+                    <li class="list-group-item"><strong>Short Name</strong>: {{ $project->shortname }}</li>
+                    <li class="list-group-item"><strong>Date Submitted</strong>: {{ $project->submit_date }}</li>
+                    <li class="list-group-item"><strong>Win/Loss</strong>: {{ $project->arWinLoss[$project->winloss] }}</li>
+                    <li class="list-group-item"><strong>Agency</strong>:</li>
+                    <li class="list-group-item"><strong>Tags</strong>:</li>
                 </ul>
             </div>
             <div class="panel panel-default">
@@ -83,7 +85,6 @@
                     <a href="{{ action('CoversController@show', [ $project->id,$cover->id ]) }}" ><img src="{{ asset($cover->getImageThumbnailPath()) }}" alt="{{ $project->name }}" class="img-responsive"></a>
                     @else
                     <p>Sorry, there is no cover.</p>
-                    <p>{{ link_to_action('CoversController@create', 'add cover to this project', array('project_id'=>$project->id)) }}</p>
                     @endif
                 </div>
             </div>

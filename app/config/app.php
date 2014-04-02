@@ -108,6 +108,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+        'Creitive\Breadcrumbs\BreadcrumbsServiceProvider',
 
 	),
 
@@ -174,7 +175,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Image' => 'Intervention\Image\Facades\Image'
+		'Image'           => 'Intervention\Image\Facades\Image',
+        'Breadcrumbs'     => 'Creitive\Breadcrumbs\Facades\Breadcrumbs',
 
 	),
 

@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <p>breadcrumbs</p>
+            {{ Breadcrumbs::render() }}
             <h1>All Projects</h1>
         </div>
     </div>

@@ -14,11 +14,18 @@ class ProjectsController extends \BaseController {
     public function __construct()
     {
         $this->beforeFilter('auth');
+
+        Breadcrumbs::addCrumb('Dashboard', '/gl');
+        Breadcrumbs::setCssClasses('breadcrumb');
+        Breadcrumbs::setDivider(null);
     }
     
 	public function index()
 	{
 	    $projects = Project::all();
+
+        // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb('All Projects');
 
 	    return View::make('projects.index', compact('projects'));
 	}
@@ -72,6 +79,11 @@ class ProjectsController extends \BaseController {
 	    $graphics = Graphic::where('project_id','=',$id)->take(6)->get();
 	    $cover = Cover::where('project_id','=',$id)->first();
 
+        // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
+        Breadcrumbs::addCrumb($project->shortname);
+
+        // return the view
 	    return View::make('projects.show', compact('project','graphics','cover'));
 	}
 
