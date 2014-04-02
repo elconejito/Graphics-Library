@@ -32,4 +32,8 @@ class Project extends \Eloquent {
         //return the path
         return $path;
     }
+
+    public function countGraphics() {
+        return Graphic::where('project_id','=',$this->id)->count();
+    }
 }

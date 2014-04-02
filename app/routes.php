@@ -53,6 +53,7 @@ Route::get('/contact', function()
  */
 Route::resource('clients', 'ClientsController');
 Route::resource('tags', 'TagsController');
+Route::resource('agencies', 'AgenciesController');
 Route::resource('projects', 'ProjectsController');
 Route::resource('projects.graphics', 'GraphicsController');
 Route::resource('projects.covers', 'CoversController');

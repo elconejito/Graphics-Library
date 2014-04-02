@@ -36,7 +36,7 @@
                         @foreach ( $projects as $project )
                         <tr>
                             <td>{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</td>
-                            <td>0</td>
+                            <td>{{ $project->countGraphics() }}</td>
                         </tr>
                         @endforeach
                     </tbody>

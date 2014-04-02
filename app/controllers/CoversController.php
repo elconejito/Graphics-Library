@@ -68,9 +68,12 @@ class CoversController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($project_id,$id)
 	{
-		//
+        $cover = Cover::findOrFail($id);
+        $project = Project::findorfail($project_id);
+
+        return View::make('covers.show', compact('cover','project'));
 	}
 
 	/**

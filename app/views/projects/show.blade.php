@@ -33,7 +33,6 @@
                     <div class="caption">
                         <h3><a href="{{ action('GraphicsController@show', [$graphic->project_id,$graphic->id]) }}" >{{ $graphic->title }}</a><br />
                             <small>{{ $graphic->control_number }}</small></h3>
-                        <p>desc</p>
                     </div>
                 </div>
             </div>
@@ -81,7 +80,7 @@
                 </div>
                 <div class="panel-body">
                     @if ( $cover )
-                    <img src="{{ asset($cover->getImageThumbnailPath()) }}" alt="{{ $project->name }}" class="img-responsive">
+                    <a href="{{ action('CoversController@show', [ $project->id,$cover->id ]) }}" ><img src="{{ asset($cover->getImageThumbnailPath()) }}" alt="{{ $project->name }}" class="img-responsive"></a>
                     @else
                     <p>Sorry, there is no cover.</p>
                     <p>{{ link_to_action('CoversController@create', 'add cover to this project', array('project_id'=>$project->id)) }}</p>
