@@ -9,11 +9,20 @@
         <div class="col-md-12">
             <p>breadcrumbs</p>
             <h1><small>Graphics for</small><br />{{ $project->name }}</h1>
-            <p>{{ link_to_action('GraphicsController@create', 'add graphic to this project', array('project_id'=>$project->id)) }}</p>
         </div>
     </div>
     <div class="row">
         @if ( $graphics )
+        <div class="navigation">
+            <ul class="pagination pagination-sm pull-right">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+            <p>{{ count($graphics) }} graphics</p>
+        </div>
             @foreach ( $graphics as $graphic )
         <div class="col-md-3">
             <div class="thumbnail">
