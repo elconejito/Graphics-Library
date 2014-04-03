@@ -16,6 +16,7 @@ class CoversController extends \BaseController {
         $this->beforeFilter('auth');
 
         Breadcrumbs::addCrumb('Dashboard', '/gl');
+        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::setCssClasses('breadcrumb');
         Breadcrumbs::setDivider(null);
     }
@@ -90,6 +91,9 @@ class CoversController extends \BaseController {
 	{
         $cover = Cover::findOrFail($id);
         $project = Project::findorfail($project_id);
+
+        Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
+        Breadcrumbs::addCrumb('Cover');
 
         return View::make('covers.show', compact('cover','project'));
 	}

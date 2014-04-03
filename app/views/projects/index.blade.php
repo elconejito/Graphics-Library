@@ -15,14 +15,8 @@
         <div class="col-md-8">
             @if ( $projects )
             <div class="navigation">
-                <ul class="pagination pagination-sm pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-                <p>{{ count($projects) }} projects</p>
+                {{ $projects->links('components.pagination') }}
+                <p>{{ count($projects) }} of {{ Project::count() }} projects</p>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">

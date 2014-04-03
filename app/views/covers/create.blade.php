@@ -44,7 +44,6 @@
             {{ Form::close() }}
         </div>
         <div class="col-md-4">
-            <p>Create a new Graphic.</p>
         </div>
     </div>
 </div>

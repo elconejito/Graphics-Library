@@ -22,7 +22,7 @@ class ProjectsController extends \BaseController {
     
 	public function index()
 	{
-	    $projects = Project::all();
+	    $projects = Project::paginate(10);
 
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb('All Projects');
@@ -37,6 +37,9 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
+        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
+        Breadcrumbs::addCrumb('Add Project');
+
         return View::make('projects.create');
 	}
 

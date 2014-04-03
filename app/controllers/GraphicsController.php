@@ -16,6 +16,7 @@ class GraphicsController extends \BaseController {
         $this->beforeFilter('auth');
 
         Breadcrumbs::addCrumb('Dashboard', '/gl');
+        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::setCssClasses('breadcrumb');
         Breadcrumbs::setDivider(null);
     }
@@ -26,7 +27,6 @@ class GraphicsController extends \BaseController {
 	    $graphics = Graphic::where('project_id','=',$project_id)->paginate(8);
 
         // add breadcrumb before showing the view
-        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
         Breadcrumbs::addCrumb('All Graphics');
 
@@ -44,9 +44,10 @@ class GraphicsController extends \BaseController {
 	    $project = Project::findorfail($project_id);
 
         // get the last control from DB
-        $next_control = (int) Graphic::where('project_id','=',$project_id)->max('id');
+        $next_control = substr(Graphic::where('project_id','=',$project_id)->max('control_number'), -3, 3);
         // prepend the control prefix and pad the number to 3 digits
         $next_control = $project->control_prefix . str_pad($next_control + 1, 3, '0', STR_PAD_LEFT);
+        // $next_control = $next_control + 1;
 
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
@@ -106,7 +107,6 @@ class GraphicsController extends \BaseController {
         $project = Project::findorfail($project_id);
 
         // add breadcrumb before showing the view
-        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
         Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
         Breadcrumbs::addCrumb($graphic->control_number);
