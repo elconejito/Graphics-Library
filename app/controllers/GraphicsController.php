@@ -23,9 +23,10 @@ class GraphicsController extends \BaseController {
 	public function index($project_id)
 	{
 	    $project = Project::findorfail($project_id);
-	    $graphics = Graphic::where('project_id','=',$project_id)->get();
+	    $graphics = Graphic::where('project_id','=',$project_id)->paginate(8);
 
         // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
         Breadcrumbs::addCrumb('All Graphics');
 
@@ -105,6 +106,7 @@ class GraphicsController extends \BaseController {
         $project = Project::findorfail($project_id);
 
         // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
         Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
         Breadcrumbs::addCrumb($graphic->control_number);

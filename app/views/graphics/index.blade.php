@@ -14,14 +14,8 @@
     <div class="row">
         @if ( $graphics )
         <div class="navigation">
-            <ul class="pagination pagination-sm pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
-            <p>{{ count($graphics) }} graphics</p>
+            {{ $graphics->links('components.pagination') }}
+            <p>{{ count($graphics) }} of {{ $project->countGraphics() }} graphics</p>
         </div>
             @foreach ( $graphics as $graphic )
         <div class="col-md-3">
