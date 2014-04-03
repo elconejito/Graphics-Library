@@ -22,7 +22,7 @@
                     <li><a href="#">3</a></li>
                     <li><a href="#">&raquo;</a></li>
                 </ul>
-                <p>{{ count($graphics) }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
+                <p>{{ $project->countGraphics() }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
             </div>
                 @foreach ( $graphics as $graphic )
             <div class="col-md-4">
