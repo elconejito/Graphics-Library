@@ -30,9 +30,8 @@
                     <img src="{{ asset($graphic->getImageThumbnailPath()) }}" alt="{{ $graphic->title }}" class="img-responsive">
                 </a>
                 <div class="caption">
-                    <h3><a href="{{ action('GraphicsController@show', [$graphic->project_id,$graphic->id]) }}" >{{ $graphic->title }}</a><br />
-                        <small>{{ $graphic->control_number }}</small></h3>
-                    <p>desc</p>
+                    <h3><small>{{ $graphic->control_number }}</small><br />
+                        <a href="{{ action('GraphicsController@show', [$graphic->project_id,$graphic->id]) }}" >{{ $graphic->title }}</a></h3>
                 </div>
             </div>
         </div>

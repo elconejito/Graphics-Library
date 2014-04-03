@@ -38,7 +38,7 @@
             <div class="form-group @if($errors->first('control_number'))has-error@endif">
                 {{ Form::label('control_number','Control Number', array('class' => 'control-label col-md-2')) }}
                 <div class="col-md-10">
-                    {{ Form::text('control_number', $project->control_prefix, array('class' => 'form-control', 'placeholder'=>'Control Number')) }}
+                    {{ Form::text('control_number', $next_control, array('class' => 'form-control', 'placeholder'=>'Control Number')) }}
                 </div>
             </div>
             <div class="form-group @if($errors->first('path'))has-error@endif">

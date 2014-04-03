@@ -42,12 +42,17 @@ class GraphicsController extends \BaseController {
 	{
 	    $project = Project::findorfail($project_id);
 
+        // get the last control from DB
+        $next_control = (int) Graphic::where('project_id','=',$project_id)->max('id');
+        // prepend the control prefix and pad the number to 3 digits
+        $next_control = $project->control_prefix . str_pad($next_control + 1, 3, '0', STR_PAD_LEFT);
+
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
         Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
         Breadcrumbs::addCrumb('Add Graphic');
 
-        return View::make('graphics.create', compact('project'));
+        return View::make('graphics.create', compact('project','next_control'));
 	}
 
 	/**
