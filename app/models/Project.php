@@ -17,7 +17,7 @@ class Project extends \Eloquent {
     ];
 
     // Don't forget to fill this array
-    protected $fillable = ['name','control_prefix','shortname','graphicsfolder','submit_date','winloss'];
+    protected $fillable = ['agency','name','shortname','control_prefix','description','graphicsfolder','submit_date','winloss'];
     
     public function getGraphicFolderPath() {
         // get the root for this project

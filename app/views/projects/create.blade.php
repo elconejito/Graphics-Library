@@ -57,9 +57,9 @@
             </div>
 
             <div class="form-group @if($errors->first('description'))has-error@endif">
-                {{ Form::label('description','Agency/Client', array('class' => 'control-label col-md-3')) }}
+                {{ Form::label('description','Description', array('class' => 'control-label col-md-3')) }}
                 <div class="col-md-9">
-                    description
+                    {{ Form::textarea('description', Input::old('description'), array('class' => 'form-control', 'placeholder'=>'Description')) }}
                 </div>
             </div>
 
