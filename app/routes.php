@@ -42,10 +42,12 @@ Route::get('/gl', ['as' => 'gl', function() {
     
 }])->before('auth');
 
-Route::get('/contact', function()
-{
-	return View::make('contact');
-});
+Route::get('/admin', ['as' => 'admin', function() {
+    
+    return View::make('admin');
+    
+}])->before('auth');
+
 
 /*
  * Routes to resources

@@ -16,6 +16,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
                 @if( Auth::check() )
+                <li>{{ link_to('admin', 'Admin') }}</li>
                 <li>{{ link_to_action('UsersController@getLogout', 'Logout') }}</li>
                 @else
                 <li>{{ link_to_action('UsersController@getLogin', 'Login') }}</li>
