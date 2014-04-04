@@ -31,7 +31,7 @@
             <div class="form-group @if($errors->first('agency'))has-error@endif">
                 {{ Form::label('agency','Agency/Client', array('class' => 'control-label col-md-3')) }}
                 <div class="col-md-9">
-                    Agency
+                    {{ Form::select('agency', $agencies, Input::old('name'), array('class' => 'form-control')) }}
                 </div>
             </div>
 

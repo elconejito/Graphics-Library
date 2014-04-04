@@ -21,12 +21,12 @@
                     <h3 class="panel-title">Information</h3>
                 </div>
                 <div class="panel-body">
-                    <p>desc</p>
+                    <p>{{ $project->description }}</p>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item">Project: {{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
-                    <li class="list-group-item">Date Submitted: {{ $project->submit_date }}</li>
-                    <li class="list-group-item">Win/Loss: {{ $project->arWinLoss[$project->winloss] }}</li>
+                    <li class="list-group-item"><strong>Project</strong>: {{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
+                    <li class="list-group-item"><strong>Date Submitted</strong>: {{ $project->submit_date }}</li>
+                    <li class="list-group-item"><strong>Win/Loss</strong>: {{ $project->arWinLoss[$project->winloss] }}</li>
                 </ul>
             </div>
             <div class="panel panel-default">

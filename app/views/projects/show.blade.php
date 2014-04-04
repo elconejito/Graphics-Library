@@ -59,13 +59,13 @@
                     <h3 class="panel-title">Information</h3>
                 </div>
                 <div class="panel-body">
-                    <p>desc</p>
+                    <p>{{ $project->description }}</p>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item"><strong>Short Name</strong>: {{ $project->shortname }}</li>
                     <li class="list-group-item"><strong>Date Submitted</strong>: {{ $project->submit_date }}</li>
                     <li class="list-group-item"><strong>Win/Loss</strong>: {{ $project->arWinLoss[$project->winloss] }}</li>
-                    <li class="list-group-item"><strong>Agency</strong>:</li>
+                    <li class="list-group-item"><strong>Agency</strong>: {{ $agencies[$project->agency] }}</li>
                     <li class="list-group-item"><strong>Tags</strong>:</li>
                 </ul>
             </div>

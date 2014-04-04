@@ -37,10 +37,12 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
+        $agencies = Agency::all()->lists('name','id');
+
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb('Add Project');
 
-        return View::make('projects.create');
+        return View::make('projects.create', compact('agencies'));
 	}
 
 	/**
@@ -60,9 +62,10 @@ class ProjectsController extends \BaseController {
         // create folder for images
         $data['graphicsfolder'] = preg_replace('/\s+/', '_', $data['shortname']);
         $dirPath = public_path().'/data/'.$data['graphicsfolder'];
-        if ( ! File::makeDirectory($dirPath) ) {
-            return Redirect::back()->withInput()->message('Could not create directory');
-        }
+        if ( ! File::exists($dirPath) )
+            if ( ! File::makeDirectory($dirPath) ) {
+                return Redirect::back()->withInput()->message('Could not create directory');
+            };
 
         // save the project
 	    Project::create($data);
@@ -81,13 +84,14 @@ class ProjectsController extends \BaseController {
 	    $project = Project::findOrFail($id);
 	    $graphics = Graphic::where('project_id','=',$id)->take(6)->get();
 	    $cover = Cover::where('project_id','=',$id)->first();
+        $agencies = Agency::all()->lists('name','id');
 
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname);
 
         // return the view
-	    return View::make('projects.show', compact('project','graphics','cover'));
+	    return View::make('projects.show', compact('project','graphics','cover','agencies'));
 	}
 
 	/**
