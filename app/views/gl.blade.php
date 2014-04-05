@@ -14,27 +14,28 @@
 		<div class="row">
 			<div class="col-md-4">
 				<h3>Projects</h3>
-				<p>{{ link_to_action('ProjectsController@create', 'add new project') }}</p>
-				<p>{{ link_to_action('ProjectsController@index', 'browse all projects') }}</p>
+                <p>Browse by Project</p>
 				<ul class="list-group">
 				@if ( $projects )
 				    @foreach ( $projects as $project )
 				    <li class="list-group-item">{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
 				    @endforeach
+                    <li class="list-group-item">{{ link_to_action('ProjectsController@index', 'browse all projects') }}</li>
 				@else
-				    <li class="list-group-item">no projects</li>
+				    <li class="list-group-item">No Projects</li>
 				@endif
 				</ul>
 			</div>
 			<div class="col-md-4">
-				<h3>Graphics</h3>
+				<h3>Agencies</h3>
+                <p>Browse by Agency</p>
 				<ul class="list-group">
-				@if ( $graphics )
-				    @foreach ( $graphics as $graphic )
-				    <li class="list-group-item">{{ link_to_action('GraphicsController@show', $graphic->control_number, array('id'=>$graphic->id)) }}<br />{{ $graphic->title }}</li>
+				@if ( $agencies )
+				    @foreach ( $agencies as $agency )
+				    <li class="list-group-item">{{ link_to_action('AgenciesController@show', $agency->shortname, array('id'=>$agency->id)) }}</li>
 				    @endforeach
 				@else
-				    <li class="list-group-item">no graphics</li>
+				    <li class="list-group-item">No Agencies</li>
 				@endif
 				</ul>
 			</div>

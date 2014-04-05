@@ -14,9 +14,10 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<p>in progress</p>
-				<p>{{ link_to_action('AgenciesController@create', 'New Agency') }}</p>
-				<p>{{ link_to_action('AgenciesController@index', 'List Agencies') }}</p>
+                <ul class="list-group">
+				    <li class="list-group-item">{{ link_to_action('AgenciesController@create', 'Add Agency') }}</li>
+                    <li class="list-group-item">{{ link_to_action('ProjectsController@create', 'Add Project') }}</li>
+                </ul>
 			</div>
 		</div>  <!-- /row -->
 	</div>

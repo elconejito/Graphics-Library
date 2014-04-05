@@ -37,7 +37,8 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
-        $agencies = Agency::all()->lists('name','id');
+        $agencies = Agency::orderby('name')
+            ->lists('name','id');
 
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb('Add Project');
@@ -84,7 +85,8 @@ class ProjectsController extends \BaseController {
 	    $project = Project::findOrFail($id);
 	    $graphics = Graphic::where('project_id','=',$id)->take(6)->get();
 	    $cover = Cover::where('project_id','=',$id)->first();
-        $agencies = Agency::all()->lists('name','id');
+        $agencies = Agency::orderby('name')
+            ->lists('name','id');
 
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));

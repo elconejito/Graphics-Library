@@ -34,11 +34,10 @@ Route::get('/gl', ['as' => 'gl', function() {
     $projects = Project::orderby('created_at')
         ->take(5)
         ->get();
-    $graphics = Graphic::orderby('created_at')
-        ->take(5)
+    $agencies = Agency::orderby('shortname')
         ->get();
     
-    return View::make('gl', compact('projects','graphics'));
+    return View::make('gl', compact('projects','agencies'));
     
 }])->before('auth');
 

@@ -105,13 +105,14 @@ class GraphicsController extends \BaseController {
 	{
 	    $graphic = Graphic::findOrFail($id);
         $project = Project::findorfail($project_id);
+        $agencies = Agency::lists('name','id');
 
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
         Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
         Breadcrumbs::addCrumb($graphic->control_number);
 
-	    return View::make('graphics.show', compact('graphic','project'));
+	    return View::make('graphics.show', compact('graphic','project','agencies'));
 	}
 
 	/**

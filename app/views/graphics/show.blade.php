@@ -21,14 +21,14 @@
                     <h3 class="panel-title">Information</h3>
                 </div>
                 <div class="panel-body">
-                    <p>desc</p>
+                    <p>{{ $graphic->description }}</p>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item">Control #: {{ $graphic->control_number }}</li>
-                    <li class="list-group-item">Title: {{ $graphic->title }}</li>
-                    <li class="list-group-item">Project: {{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
-                    <li class="list-group-item">agency</li>
-                    <li class="list-group-item">tags</li>
+                    <li class="list-group-item"><strong>Control #</strong>: {{ $graphic->control_number }}</li>
+                    <li class="list-group-item"><strong>Title</strong>: {{ $graphic->title }}</li>
+                    <li class="list-group-item"><strong>Project</strong>: {{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
+                    <li class="list-group-item"><strong>Agency</strong>: {{ $agencies[$project->agency] }}</li>
+                    <li class="list-group-item"><strong>Tags</strong>:</li>
                 </ul>
             </div>
             <div class="panel panel-default">

@@ -8,14 +8,14 @@
     <div class="row">
         <div class="col-md-12">
             {{ Breadcrumbs::render() }}
-            <h1>Project: {{ $project->name }}</h1>
+            <h1><small>Project:</small><br />{{ $project->name }}</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8">
             @if ( count($graphics) > 0 )
             <div class="navigation">
-                <p>{{ $project->countGraphics() }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
+                <p>{{ count($graphics) }} of {{ $project->countGraphics() }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
             </div>
                 @foreach ( $graphics as $graphic )
             <div class="col-md-4">
