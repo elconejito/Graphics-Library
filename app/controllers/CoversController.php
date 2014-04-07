@@ -163,7 +163,10 @@ class CoversController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		// delete the image files
+		
+		// destroy the object
+		
 	}
 
 }

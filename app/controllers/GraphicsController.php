@@ -47,8 +47,7 @@ class GraphicsController extends \BaseController {
         $next_control = substr(Graphic::where('project_id','=',$project_id)->max('control_number'), -3, 3);
         // prepend the control prefix and pad the number to 3 digits
         $next_control = $project->control_prefix . str_pad($next_control + 1, 3, '0', STR_PAD_LEFT);
-        // $next_control = $next_control + 1;
-
+        
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
         Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
@@ -65,7 +64,7 @@ class GraphicsController extends \BaseController {
 	public function store()
 	{
 	    // setup my rules for validation
-        $validator = Validator::make($data = Input::all(), Graphic::$rules);
+	    $validator = Validator::make($data = Input::all(), Graphic::$rules);
         // check validation
 	    if ($validator->fails())
 	    {
@@ -79,7 +78,7 @@ class GraphicsController extends \BaseController {
         $image = Image::make(Input::file('image')->getRealPath());
         $save_path = $project->getGraphicFolderPath();
         // #TODO find a better cleaner regex
-        $save_name = $data['control_number'].'_'.preg_replace('/^((?![A-Za-z0-9_]).)*$/', '_', $data['title']). '.' .Input::file('image')->getClientOriginalExtension();
+        $save_name = $data['control_number'].'_'.preg_replace('/[^a-zA-Z0-9]+/', '_', $data['title']). '.' .Input::file('image')->getClientOriginalExtension();
         // in order, save the fullsize > main > thumbnail
         $image->save($save_path . 'fullsize/' . $save_name)
                 ->resize(750,500,true)
@@ -121,11 +120,21 @@ class GraphicsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($project_id,$id)
 	{
-		$graphic = Graphic::find($id);
-
-		return View::make('graphics.edit', compact('graphic'));
+		$graphic = Graphic::findOrFail($id);
+        $project = Project::findorfail($project_id);
+        
+        // just need this variable defined for edit page
+        $next_control = $graphic->control_number;
+        
+        // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
+        Breadcrumbs::addCrumb('All Graphics', action('GraphicsController@index', [$project_id]));
+        Breadcrumbs::addCrumb($graphic->control_number, action('GraphicsController@show', [$project_id,$id]));
+        Breadcrumbs::addCrumb('Edit');
+        
+		return View::make('graphics.edit', compact('graphic','project','next_control'));
 	}
 
 	/**
@@ -134,20 +143,69 @@ class GraphicsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($project_id,$id)
 	{
-		$graphic = Graphic::findOrFail($id);
-
-		$validator = Validator::make($data = Input::all(), Graphic::$rules);
-
-        if ($validator->fails())
-        {
-            return Redirect::back()->withErrors($validator)->withInput();
+	    // setup my rules for validation
+	    // load the default rules for this model
+	    $rules = Graphic::$rules;
+	    // make image not required
+	    $rules['image'] = 'image';
+	    $validator = Validator::make($data = Input::all(), $rules);
+        // check validation
+	    if ($validator->fails())
+	    {
+	        return Redirect::back()->withErrors($validator)->withInput();
+	    }
+	    
+		// pull in the project & graphic
+        $project = Project::findOrFail(Input::get('project_id'));
+        $graphic = Graphic::findOrFail($id);
+        
+        // if the title changed, move the image file to new location
+        if ( $graphic->title != $data['title'] || $graphic->control_number != $data['control_number'] ) {
+            $save_path = $project->getGraphicFolderPath();
+            $new_name = $data['control_number'].'_'.preg_replace('/[^a-zA-Z0-9]+/', '_', $data['title']). '.' .File::extension($graphic->image);
+            // move the images
+            if ( File::exists($save_path . 'fullsize/' . $graphic->image) )
+                File::move(
+                    $save_path . 'fullsize/' . $graphic->image,
+                    $save_path . 'fullsize/' . $new_name
+                );
+            if ( File::exists($save_path . 'main/' . $graphic->image) )
+                File::move(
+                    $save_path . 'main/' . $graphic->image,
+                    $save_path . 'main/' . $new_name
+                );
+            if ( File::exists($save_path . 'thumbnail/' . $graphic->image) )
+                File::move(
+                    $save_path . 'thumbnail/' . $graphic->image,
+                    $save_path . 'thumbnail/' . $new_name
+                );
+            $data["image"] = $new_name;
         }
-
-		$graphic->update($data);
-
-		return Redirect::route('graphics.index');
+        
+        // if there is an image attached, upload it to replace current
+        if ( Input::hasFile('image') ) {
+            // process the image
+            $image = Image::make(Input::file('image')->getRealPath());
+            // build the path
+            $save_path = $project->getGraphicFolderPath();
+            // create the filename
+            $save_name = $data['control_number'].'_'.preg_replace('/[^a-zA-Z0-9]+/', '_', $data['title']). '.' .Input::file('image')->getClientOriginalExtension();
+            // in order, save the fullsize > main > thumbnail
+            $image->save($save_path . 'fullsize/' . $save_name)
+                    ->resize(750,500,true)
+                    ->save($save_path . 'main/' . $save_name)
+                    ->grab(250)
+                    ->save($save_path . 'thumbnail/' . $save_name);
+            
+            // take the image object out of inputted data array and replace with new filename before saving
+            $data["image"] = $save_name;
+        }
+        
+	    $graphic->update($data);
+	    
+		return Redirect::route('projects.graphics.show', compact('project_id','id'));
 	}
 
 	/**

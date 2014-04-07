@@ -18,46 +18,10 @@
             {{ Form::hidden('project_id', $project->id) }}
 
             @if( count($errors->all()) > 0 )
-            <div class="alert alert-danger alert-dismissable">
-            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            	<p><span class="glyphicon glyphicon-warning-sign"></span> <strong>Warning!</strong> The form has some errors!</p>
-            	<ul>
-            	@foreach( $errors->all('<li>:message</li>') as $message )
-                    {{ $message }}
-                @endforeach
-                </ul>
-            </div>
+                @include('components.errors')
             @endif
-            
-            <div class="form-group @if($errors->first('title'))has-error@endif">
-            	{{ Form::label('title','Graphic Title', array('class' => 'control-label col-md-3')) }}
-            	<div class="col-md-9">
-            		{{ Form::text('title', Input::old('title'), array('class' => 'form-control', 'placeholder'=>'Graphic Title')) }}
-            	</div>
-            </div>
-            <div class="form-group @if($errors->first('control_number'))has-error@endif">
-                {{ Form::label('control_number','Control Number', array('class' => 'control-label col-md-3')) }}
-                <div class="col-md-9">
-                    {{ Form::text('control_number', $next_control, array('class' => 'form-control', 'placeholder'=>'Control Number')) }}
-                </div>
-            </div>
-            <div class="form-group @if($errors->first('description'))has-error@endif">
-                {{ Form::label('description','Description', array('class' => 'control-label col-md-3')) }}
-                <div class="col-md-9">
-                    {{ Form::textarea('description', Input::old('description'), array('class' => 'form-control', 'placeholder'=>'Description')) }}
-                </div>
-            </div>
-            <div class="form-group @if($errors->first('path'))has-error@endif">
-                {{ Form::label('image','Image', array('class' => 'control-label col-md-3')) }}
-                <div class="col-md-9">
-                    {{ Form::file('image') }}
-                </div>
-            </div>
-            <div class="form-group">
-            	<div class="col-md-offset-3 col-md-9">
-            		{{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
-            	</div>
-            </div>
+
+            @include('graphics.components.form')
             
             {{ Form::close() }}
         </div>
