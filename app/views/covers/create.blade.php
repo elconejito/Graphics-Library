@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
-@section('meta_description', 'Cover Create :: Graphics Library')
-@section('meta_title', 'Cover Create :: Graphics Library')
+@section('meta_description', 'Add Cover :: Graphics Library')
+@section('meta_title', 'Add Cover :: Graphics Library')
 
 @section('content')
 <div class="container">

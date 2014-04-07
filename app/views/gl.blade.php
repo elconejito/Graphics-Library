@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
-@section('meta_description', 'Graphics Library')
-@section('meta_title', 'Graphics Library')
+@section('meta_description', 'Dashboard :: Graphics Library')
+@section('meta_title', 'Dashboard :: Graphics Library')
 
 @section('content')
     
@@ -13,10 +13,9 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<h3>Projects</h3>
-                <p>Browse by Project</p>
+				<h3>Projects<br /><small>Browse by Project</small></h3>
 				<ul class="list-group">
-				@if ( $projects )
+				@if ( count($projects) > 0 )
 				    @foreach ( $projects as $project )
 				    <li class="list-group-item">{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
 				    @endforeach
@@ -27,10 +26,9 @@
 				</ul>
 			</div>
 			<div class="col-md-4">
-				<h3>Agencies</h3>
-                <p>Browse by Agency</p>
+				<h3>Agencies<br /><small>Browse by Agency</small></h3>
 				<ul class="list-group">
-				@if ( $agencies )
+				@if ( count($agencies) > 0 )
 				    @foreach ( $agencies as $agency )
 				    <li class="list-group-item">{{ link_to_action('AgenciesController@show', $agency->shortname, array('id'=>$agency->id)) }}</li>
 				    @endforeach

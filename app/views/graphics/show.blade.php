@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
-@section('meta_description', 'Graphics Show :: Graphics Library')
-@section('meta_title', 'Graphics Show :: Graphics Library')
+@section('meta_description', $graphic->title.' :: Graphics Library')
+@section('meta_title', $graphic->title.' :: Graphics Library')
 
 @section('content')
 <div class="container">
