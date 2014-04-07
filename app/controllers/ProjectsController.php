@@ -104,9 +104,15 @@ class ProjectsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$project = Project::find($id);
+		$project = Project::findOrFail($id);
+		$agencies = Agency::orderby('name')
+            ->lists('name','id');
 
-		return View::make('projects.edit', compact('project'));
+        Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
+        Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$id]));
+        Breadcrumbs::addCrumb('Edit');
+
+		return View::make('projects.edit')->withProject($project)->withAgencies($agencies);
 	}
 
 	/**
@@ -128,7 +134,7 @@ class ProjectsController extends \BaseController {
 
 		$project->update($data);
 
-		return Redirect::route('projects.index');
+		return Redirect::action('ProjectsController@show', [$id])->with('message','Changes have been saved.');
 	}
 
 	/**
