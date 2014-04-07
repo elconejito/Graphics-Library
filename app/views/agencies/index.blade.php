@@ -15,7 +15,7 @@
         <div class="col-md-8">
             @if ( $agencies )
             <div class="navigation">
-                <p>{{ count($agencies) }} Agencies</p>
+                <p>{{ $agencies->count() }} Agencies</p>
             </div>
             <ul class="list-group">
                 @foreach ( $agencies as $agency )

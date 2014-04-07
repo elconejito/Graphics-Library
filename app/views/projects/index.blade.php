@@ -16,12 +16,13 @@
             @if ( $projects )
             <div class="navigation">
                 {{ $projects->links('components.pagination') }}
-                <p>{{ count($projects) }} of {{ Project::count() }} projects</p>
+                <p>{{ $projects->count() }} of {{ Project::count() }} projects</p>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
+                            <th>Agency</th>
                             <th>Project Name</th>
                             <th># of Graphics</th>
                         </tr>
@@ -29,7 +30,8 @@
                     <tbody>
                         @foreach ( $projects as $project )
                         <tr>
-                            <td>{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</td>
+                            <td>{{ $agencies->find($project->agency)->shortname }}</td>
+                            <td>{{ link_to_action('ProjectsController@show', $project->name, ['id'=>$project->id]) }}</td>
                             <td>{{ $project->countGraphics() }}</td>
                         </tr>
                         @endforeach

@@ -23,11 +23,13 @@ class ProjectsController extends \BaseController {
 	public function index()
 	{
 	    $projects = Project::paginate(10);
+	    // $agencies = Agency::lists('name','id');
+	    $agencies = Agency::all();
 
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb('All Projects');
 
-	    return View::make('projects.index', compact('projects'));
+	    return View::make('projects.index', compact('projects','agencies'));
 	}
 
 	/**

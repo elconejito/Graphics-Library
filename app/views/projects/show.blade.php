@@ -15,7 +15,7 @@
         <div class="col-md-8">
             @if ( count($graphics) > 0 )
             <div class="navigation">
-                <p>{{ count($graphics) }} of {{ $project->countGraphics() }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
+                <p>{{ $graphics->count() }} of {{ $project->countGraphics() }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
             </div>
                 @foreach ( $graphics as $graphic )
             <div class="col-md-4">

@@ -15,7 +15,7 @@
         @if ( $graphics )
         <div class="navigation">
             {{ $graphics->links('components.pagination') }}
-            <p>{{ count($graphics) }} of {{ $project->countGraphics() }} graphics</p>
+            <p>{{ $graphics->count() }} of {{ $project->countGraphics() }} graphics</p>
         </div>
             @foreach ( $graphics as $graphic )
         <div class="col-md-3">
