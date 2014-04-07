@@ -104,9 +104,18 @@ class CoversController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($project_id,$id)
 	{
 		//
+        $project = Project::findorfail($project_id);
+        $cover = Cover::findOrFail($id);
+
+        // add breadcrumb before showing the view
+        Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$project_id]));
+        Breadcrumbs::addCrumb('Cover', action('CoversController@show', [$project->id]));
+        Breadcrumbs::addCrumb('Edit');
+
+        return View::make('covers.edit', compact('project','cover'));
 	}
 
 	/**
@@ -117,7 +126,33 @@ class CoversController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		// setup my rules for validation
+        $validator = Validator::make($data = Input::all(), Cover::$rules);
+        // check validation
+	    if ($validator->fails())
+	    {
+	        return Redirect::back()->withErrors($validator)->withInput();
+	    }
+	    
+        // pull in the project
+        $cover = Cover::findOrFail(Input::get('project_id'));
+        $project = Project::findOrFail(Input::get('project_id'));
+        
+        // process the image
+        $image = Image::make(Input::file('image')->getRealPath());
+        $save_path = $project->getGraphicFolderPath();
+        // Use the same filename as before
+        $save_name = $cover->image;
+        // in order, save the fullsize > main > thumbnail
+        $image->save($save_path . 'fullsize/' . $save_name)
+                ->resize(750,500,true)
+                ->save($save_path . 'main/' . $save_name)
+                ->grab(350)
+                ->save($save_path . 'thumbnail/' . $save_name);
+        
+        // no need to update anything in the DB because those values are all the same
+
+	    return Redirect::route('projects.show', array('project'=>$project->id));
 	}
 
 	/**

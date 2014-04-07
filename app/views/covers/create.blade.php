@@ -18,28 +18,10 @@
             {{ Form::hidden('project_id', $project->id) }}
 
             @if( count($errors->all()) > 0 )
-            <div class="alert alert-danger alert-dismissable">
-            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            	<p><span class="glyphicon glyphicon-warning-sign"></span> <strong>Warning!</strong> The form has some errors!</p>
-            	<ul>
-            	@foreach( $errors->all('<li>:message</li>') as $message )
-                    {{ $message }}
-                @endforeach
-                </ul>
-            </div>
+                @include('components.errors')
             @endif
-            
-            <div class="form-group @if($errors->first('path'))has-error@endif">
-                {{ Form::label('image','Image', array('class' => 'control-label col-md-2')) }}
-                <div class="col-md-10">
-                    {{ Form::file('image') }}
-                </div>
-            </div>
-            <div class="form-group">
-            	<div class="col-sm-offset-2 col-sm-10">
-            		{{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
-            	</div>
-            </div>
+
+            @include('projects.components.form')
             
             {{ Form::close() }}
         </div>
