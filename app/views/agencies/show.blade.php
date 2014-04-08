@@ -16,7 +16,7 @@
             @if ( $projects->count() > 0 )
             <div class="navigation">
                 {{ $projects->links('components.pagination') }}
-                <p>{{ $projects->count() }} of {{ Project::count() }} projects</p>
+                <p>{{ $projects->count() }} of {{ Project::where('agency',$agency->id)->count() }} projects</p>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">

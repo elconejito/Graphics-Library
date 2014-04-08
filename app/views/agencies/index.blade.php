@@ -19,7 +19,7 @@
             </div>
             <ul class="list-group">
                 @foreach ( $agencies as $agency )
-                <li class="list-group-item">[{{ $agency->shortname }}] {{ $agency->name }} <a href="{{ action('AgenciesController@edit', $agency->id) }}" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-pencil"></span></a></li>
+                <li class="list-group-item">[{{ $agency->shortname }}] {{ link_to_action('AgenciesController@show', $agency->name, $agency->id) }} <a href="{{ action('AgenciesController@edit', $agency->id) }}" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-pencil"></span></a></li>
                 @endforeach
             <ul>
             @else
