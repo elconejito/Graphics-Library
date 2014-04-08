@@ -32,6 +32,7 @@
 				    @foreach ( $agencies as $agency )
 				    <li class="list-group-item">{{ link_to_action('AgenciesController@show', $agency->shortname, array('id'=>$agency->id)) }}</li>
 				    @endforeach
+                    <li class="list-group-item">{{ link_to_action('AgenciesController@index', 'browse all Agencies') }}</li>
 				@else
 				    <li class="list-group-item">No Agencies</li>
 				@endif

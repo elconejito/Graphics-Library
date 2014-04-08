@@ -16,7 +16,6 @@ class AgenciesController extends \BaseController {
         $this->beforeFilter('auth');
 
         Breadcrumbs::addCrumb('Dashboard', '/gl');
-        Breadcrumbs::addCrumb('Admin', '/admin');
         Breadcrumbs::setCssClasses('breadcrumb');
         Breadcrumbs::setDivider(null);
     }
@@ -41,6 +40,7 @@ class AgenciesController extends \BaseController {
 	public function create()
 	{
 	    // setup BreadCrumbs
+        Breadcrumbs::addCrumb('All Agencies', action('AgenciesController@index'));
 	    Breadcrumbs::addCrumb('Add Agency');
 	    
 		// return the view
@@ -75,7 +75,14 @@ class AgenciesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        $agency = Agency::findOrFail($id);
+
+        // setup BreadCrumbs
+        Breadcrumbs::addCrumb('All Agencies', action('AgenciesController@index'));
+        Breadcrumbs::addCrumb($agency->shortname);
+
+        // return the view
+        return View::make('agencies.show', compact('agency'));
 	}
 
 	/**
@@ -86,7 +93,14 @@ class AgenciesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+        $agency = Agency::findOrFail($id);
+
+        // setup BreadCrumbs
+        Breadcrumbs::addCrumb('All Agencies', action('AgenciesController@index'));
+        Breadcrumbs::addCrumb($agency->shortname);
+
+        // return the view
+        return View::make('agencies.edit', compact('agency'));
 	}
 
 	/**
@@ -97,7 +111,17 @@ class AgenciesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+        // setup my rules for validation
+        $validator = Validator::make($data = Input::all(), Agency::$rules);
+        // check validation
+        if ($validator->fails())
+        {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        Agency::findOrFail($id)->update($data);
+
+        return Redirect::route('agencies.index');
 	}
 
 	/**
