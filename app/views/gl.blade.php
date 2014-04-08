@@ -19,7 +19,7 @@
 				    @foreach ( $projects as $project )
 				    <li class="list-group-item">{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
 				    @endforeach
-                    <li class="list-group-item">{{ link_to_action('ProjectsController@index', 'browse all projects') }}</li>
+                    <li class="list-group-item list-group-item-info">{{ link_to_action('ProjectsController@index', 'browse all projects') }}</li>
 				@else
 				    <li class="list-group-item">No Projects</li>
 				@endif
@@ -32,7 +32,7 @@
 				    @foreach ( $agencies as $agency )
 				    <li class="list-group-item">{{ link_to_action('AgenciesController@show', $agency->shortname, array('id'=>$agency->id)) }}</li>
 				    @endforeach
-                    <li class="list-group-item">{{ link_to_action('AgenciesController@index', 'browse all Agencies') }}</li>
+                    <li class="list-group-item list-group-item-info">{{ link_to_action('AgenciesController@index', 'browse all Agencies') }}</li>
 				@else
 				    <li class="list-group-item">No Agencies</li>
 				@endif
