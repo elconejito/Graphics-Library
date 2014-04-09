@@ -34,4 +34,38 @@ class Graphic extends \Eloquent {
         return 'data/' .$project->graphicsfolder. '/thumbnail/' .$this->image;
     }
 
+    public function getDeleteText() {
+        $text = '<h3><span class="glyphicon glyphicon-warning-sign"></span> CAUTION!</h3>
+<p>You are about to delete the graphic &quot;<strong>'.$this->control_number.'_'.$this->title.'</strong>&quot;.</p>
+<p>Are you REALLY SURE you wish to delete this graphic? This cannot be undone. If you are really sure, then click the delete button below.</p>
+<p>If you are not sure, remain calm, just hit the cancel button below or press the escape key and slowly back away from the keyboard...</p>';
+        // append the hidden form
+        $text .= Form::open( ['method'=>'DELETE', 'action' => 'projects.graphics.destroy', 'id' => 'deleteGraphic'] );
+        $text .= Form::hidden('id', $this->id);
+        $text .= Form::hidden('project_id', $this->project_id);
+        $text .= Form::close();
+
+        // return the text
+        return $text;
+    }
+
+    public function getDeleteButtons() {
+        $buttons = [
+            'delete' => [
+                'text' => 'DELETE',
+                'class' => 'btn btn-danger post',
+                'data' => [
+                    'target' => '#deleteGraphic'
+                ]
+            ],
+            'close' => [
+                'text' => 'Cancel',
+                'class' => 'btn btn-default',
+                'data' => [
+                    'dismiss' => 'modal'
+                ]
+            ]
+        ];
+        return $buttons;
+    }
 }

@@ -14,6 +14,8 @@ class GraphicsController extends \BaseController {
     public function __construct()
     {
         $this->beforeFilter('auth');
+        $this->beforeFilter('csrf', array('on' => 'post'));
+
 
         Breadcrumbs::addCrumb('Dashboard', '/gl');
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
@@ -208,17 +210,54 @@ class GraphicsController extends \BaseController {
 		return Redirect::route('projects.graphics.show', compact('project_id','id'));
 	}
 
+    /**
+     * Display the specified graphic.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function getDelete($id)
+    {
+        $graphic = Graphic::findOrFail($id);
+        $project = Project::findorfail($graphic->project_id);
+        $modal = new Modal();
+        $modal->title = 'Delete '.$graphic->title.'?';
+        $modal->body = $graphic->getDeleteText();
+        $modal->buttons = $graphic->getDeleteButtons();
+
+        return View::make('components.modal', compact('graphic','project','modal'));
+    }
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		Graphic::destroy($id);
+		$result = Graphic::destroy(Input::get('id'));
 
-		return Redirect::route('graphics.index');
+        if ( $result ) {
+            Session::flash('message', 'Graphic has been deleted');
+            $response = [
+                'status' => '1',
+                'code' => '200',
+                'message' => 'success',
+                'data' => [
+                    'action' => 'redirect',
+                    'url' => action('GraphicsController@index', Input::get('project_id'))
+                ]
+            ];
+        } else {
+            $response = [
+                'status' => '0',
+                'code' => '300',
+                'message' => 'fail',
+                'data' => ''
+            ];
+        }
+        return Response::json($response);
 	}
 
 }

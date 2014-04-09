@@ -65,3 +65,4 @@ Route::resource('projects.covers', 'CoversController');
  */
 
 Route::controller('users', 'UsersController');
+Route::controller('graphics', 'GraphicsController');

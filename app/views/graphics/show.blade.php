@@ -16,24 +16,17 @@
             <img src="{{ asset($graphic->getImageMainPath()) }}" alt="{{ $graphic->title }}" class="img-responsive img-thumbnail graphic-full">
         </div>
         <div class="col-md-4">
-            <nav class="navbar navbar-default toolbar" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <span class="navbar-text">Tools</span>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ action('GraphicsController@edit', ['project_id'=>$project->id, 'id'=>$graphic->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-pencil"></span> graphic</a></li>
-                        </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Graphic Tools</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="btn-group actions">
+                        <a href="{{ action('GraphicsController@edit', ['project_id'=>$project->id, 'id'=>$graphic->id]) }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> edit</a>
+                        <a href="{{ action('GraphicsController@getDelete', ['id'=>$graphic->id]) }}" class="btn btn-danger" data-toggle="modal" data-target="#modalTarget"><span class="glyphicon glyphicon-remove"></span> delete</a>
                     </div>
                 </div>
-            </nav>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Information</h3>
