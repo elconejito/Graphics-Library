@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             {{ Breadcrumbs::render() }}
-            <h1><small>Project:</small><br />{{ $project->name }}</h1>
+            <h1><small>Project</small><br />{{ $project->name }}</h1>
         </div>
     </div>
     <div class="row">
@@ -35,26 +35,18 @@
             @endif
         </div>
         <div class="col-md-4">
-            <nav class="navbar navbar-default toolbar" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <span class="navbar-text">Tools</span>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ action('ProjectsController@edit',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-pencil"></span> edit</a></li>
-                            <li><a href="{{ action('GraphicsController@create',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> graphic</a></li>
-                            <li><a href="{{ action('CoversController@create', ['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> cover</a></li>
-                        </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Project Tools</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="btn-group actions">
+                        <a href="{{ action('GraphicsController@create',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> graphic</a>
+                        <a href="{{ action('CoversController@create', ['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> cover</a>
+                        <a href="{{ action('ProjectsController@edit',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-pencil"></span> edit</a>
                     </div>
                 </div>
-            </nav>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Information</h3>

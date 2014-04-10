@@ -54,9 +54,18 @@ class ProjectsController extends \BaseController {
 	 */
 	public function store()
 	{
-	    $validator = Validator::make($data = Input::all(), Project::$rules);
+        $data = Input::all();
+        foreach ( $data as $k => $v ) {
+            if ( $k == 'description' ) {
+                $data[$k] = Purifier::clean($v);
+            } else {
+                $data[$k] = Purifier::clean($v,'text');
+            }
+        }
 
-	    if ($validator->fails())
+        $validator = Validator::make($data, Project::$rules);
+
+	    if ( $validator->fails() )
 	    {
 	        return Redirect::back()->withErrors($validator)->withInput();
 	    }
@@ -126,9 +135,18 @@ class ProjectsController extends \BaseController {
 	{
 		$project = Project::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Project::$rules);
+        $data = Input::all();
+        foreach ( $data as $k => $v ) {
+            if ( $k == 'description' ) {
+                $data[$k] = Purifier::clean($v);
+            } else {
+                $data[$k] = Purifier::clean($v,'text');
+            }
+        }
 
-        if ($validator->fails())
+		$validator = Validator::make($data, Project::$rules);
+
+        if ( $validator->fails() )
         {
             return Redirect::back()->withErrors($validator)->withInput();
         }

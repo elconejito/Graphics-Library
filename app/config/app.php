@@ -109,6 +109,7 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
         'Creitive\Breadcrumbs\BreadcrumbsServiceProvider',
+        'Mews\Purifier\PurifierServiceProvider',
 
 	),
 
@@ -177,6 +178,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Image'           => 'Intervention\Image\Facades\Image',
         'Breadcrumbs'     => 'Creitive\Breadcrumbs\Facades\Breadcrumbs',
+        'Purifier'        => 'Mews\Purifier\Facades\Purifier',
 
 	),
 

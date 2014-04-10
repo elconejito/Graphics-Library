@@ -3,6 +3,20 @@
  */
 
 $(document).ready(function () {
+    // size all the tiles to the same height.
+    $(window).on('load', function() {
+        // get the height of any tiles or tabs and set them all to the same
+        var $tileHeight = getMaxHeight(".thumbnail");
+        var $tabHeight = getMaxHeight(".tab-pane");
+        // get the width of the window
+        var $ww = $(document).innerWidth();
+
+        // if there are tiles, set to same height
+        if ( $tileHeight != 0 )  $(".thumbnail").height($tileHeight);
+        // if there are tabs, set to same height
+        if ( $tabHeight != 0 ) $(".tab-pane").height($tabHeight);
+    }).resize();
+
     /*
      * #modal functions
      */
@@ -103,3 +117,21 @@ function displayAlert($type,$message,$location) {
 
     $($location).prepend($string);
 }
+
+/*
+ * Get the max height of all objects with a certain selector
+ *
+ * @param string a selector using jQuery syntax. must include . or # for classes or ids
+ * @return number either the actual height of the tallest element or a zero
+ */
+var getMaxHeight = function(selector) {
+    var height = Math.max.apply(
+        Math, $(selector).map(function() {
+            return $(this).height();
+        }).get());
+    if ( height > 0 ) {
+        return height;
+    } else {
+        return 0;
+    }
+};
