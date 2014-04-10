@@ -92,8 +92,12 @@ class GraphicsController extends \BaseController {
         $data["image"] = $save_name;
 
 	    Graphic::create($data);
-
-	    return Redirect::route('projects.graphics.index', array('project'=>$project->id));
+	    
+	    if ( Input::has('new') ) :
+	        return Redirect::route('projects.graphics.create', array('project'=>$project->id));
+	    else :
+	        return Redirect::route('projects.graphics.index', array('project'=>$project->id));
+	    endif;
 	}
 
 	/**

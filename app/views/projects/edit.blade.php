@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             {{ Breadcrumbs::render() }}
-            <h1>Edit &quot;{{ $project->name }}&quot;</h1>
+            <h1>Edit<br /><small>{{ $project->name }}</small></h1>
         </div>
     </div>
 

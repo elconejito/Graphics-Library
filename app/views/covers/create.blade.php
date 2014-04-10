@@ -21,7 +21,7 @@
                 @include('components.errors')
             @endif
 
-            @include('projects.components.form')
+            @include('covers.components.form')
             
             {{ Form::close() }}
         </div>
