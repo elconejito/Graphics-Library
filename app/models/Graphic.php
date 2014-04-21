@@ -12,6 +12,10 @@ class Graphic extends \Eloquent {
 
     // Don't forget to fill this array
     protected $fillable = ['control_number','title','project_id','image','description'];
+    
+    public function project() {
+        return $this->belongsTo('Project');
+    }
 
     public function getImageFullsizePath() {
         // get the project so we can get it's folder

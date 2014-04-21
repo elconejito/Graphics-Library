@@ -19,6 +19,14 @@ class Project extends \Eloquent {
     // Don't forget to fill this array
     protected $fillable = ['agency','name','shortname','control_prefix','description','graphicsfolder','submit_date','winloss'];
     
+    public function graphics() {
+        return $this->hasMany('Graphic');
+    }
+    
+    public function tags() {
+        return $this->belongsToMany('Tag');
+    }
+    
     public function getGraphicFolderPath() {
         // get the root for this project
         $path = public_path().'/data/'.$this->graphicsfolder.'/';

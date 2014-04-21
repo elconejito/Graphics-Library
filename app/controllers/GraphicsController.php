@@ -109,7 +109,7 @@ class GraphicsController extends \BaseController {
 	public function show($project_id,$id)
 	{
 	    $graphic = Graphic::findOrFail($id);
-        $project = Project::findorfail($project_id);
+        $project = $graphic->project;
         $agencies = Agency::lists('name','id');
 
         // add breadcrumb before showing the view
@@ -129,7 +129,7 @@ class GraphicsController extends \BaseController {
 	public function edit($project_id,$id)
 	{
 		$graphic = Graphic::findOrFail($id);
-        $project = Project::findorfail($project_id);
+        $project = $graphic->project;
         
         // just need this variable defined for edit page
         $next_control = $graphic->control_number;
@@ -164,8 +164,8 @@ class GraphicsController extends \BaseController {
 	    }
 	    
 		// pull in the project & graphic
-        $project = Project::findOrFail(Input::get('project_id'));
         $graphic = Graphic::findOrFail($id);
+        $project = $graphic->project;
         
         // if the title changed, move the image file to new location
         if ( $graphic->title != $data['title'] || $graphic->control_number != $data['control_number'] ) {
@@ -223,7 +223,7 @@ class GraphicsController extends \BaseController {
     public function getDelete($id)
     {
         $graphic = Graphic::findOrFail($id);
-        $project = Project::findorfail($graphic->project_id);
+        $project = $graphic->project;
         $modal = new Modal();
         $modal->title = 'Delete '.$graphic->title.'?';
         $modal->body = $graphic->getDeleteText();
