@@ -17,6 +17,7 @@
                 <ul class="list-group">
 				    <li class="list-group-item">{{ link_to_action('AgenciesController@create', 'Add Agency') }}</li>
                     <li class="list-group-item">{{ link_to_action('ProjectsController@create', 'Add Project') }}</li>
+                    <li class="list-group-item">{{ link_to_action('TagsController@create', 'Add Tag') }}</li>
                 </ul>
 			</div>
 		</div>  <!-- /row -->

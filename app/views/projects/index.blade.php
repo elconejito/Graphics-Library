@@ -58,8 +58,7 @@
                     <h3 class="panel-title">Search / Filters</h3>
                 </div>
                 <div class="panel-body">
-                    <p>search box here</p>
-                    <p>some filters here</p>
+                    @include('projects.components.filters')
                 </div>
             </div>
         </div>

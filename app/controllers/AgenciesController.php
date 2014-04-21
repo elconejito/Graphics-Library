@@ -2,14 +2,8 @@
 
 class AgenciesController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	
-	/**
-     * Instantiate a new GraphicsController instance.
+    /**
+     * Instantiate a new AgenciesController instance.
      */
     public function __construct()
     {
@@ -20,7 +14,12 @@ class AgenciesController extends \BaseController {
         Breadcrumbs::setDivider(null);
     }
     
-    public function index()
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
 	{
 		// setup BreadCrumbs
 	    Breadcrumbs::addCrumb('All Agencies');
