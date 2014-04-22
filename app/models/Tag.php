@@ -12,4 +12,8 @@ class Tag extends \Eloquent {
 	public function projects() {
 	    return $this->belongsToMany('Project');
 	}
+	
+	public function graphics() {
+	    return $this->belongsToMany('Graphic');
+	}
 }

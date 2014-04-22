@@ -16,6 +16,10 @@ class Graphic extends \Eloquent {
     public function project() {
         return $this->belongsTo('Project');
     }
+    
+    public function tags() {
+	    return $this->belongsToMany('Tag');
+	}
 
     public function getImageFullsizePath() {
         // get the project so we can get it's folder

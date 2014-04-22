@@ -19,6 +19,10 @@ class Project extends \Eloquent {
     // Don't forget to fill this array
     protected $fillable = ['agency','name','shortname','control_prefix','description','graphicsfolder','submit_date','winloss'];
     
+    public function cover() {
+        return $this->hasOne('Cover');
+    }
+    
     public function graphics() {
         return $this->hasMany('Graphic');
     }

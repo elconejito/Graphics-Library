@@ -36,8 +36,11 @@
 
             <div class="form-group @if($errors->first('submit_date'))has-error@endif">
                 {{ Form::label('submit_date','Date Submitted', array('class' => 'control-label col-md-3')) }}
-                <div class="col-md-9">
-                    {{ Form::text('submit_date', Input::old('submit_date'), array('class' => 'form-control', 'placeholder'=>'Date Submitted')) }}
+                <div class="col-md-3">
+                    {{ Form::text('submit_date', Input::old('submit_date'), array('class' => 'form-control', 'placeholder'=>'YYYY-MM-DD')) }}
+                </div>
+                <div class="col-md-3">
+                    <p class="form-control-static">YYYY-MM-DD</p>
                 </div>
             </div>
 
