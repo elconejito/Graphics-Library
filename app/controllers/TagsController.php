@@ -79,7 +79,14 @@ class TagsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$tag = Tag::findOrFail($id);
+
+        // setup BreadCrumbs
+        Breadcrumbs::addCrumb('All Tags', action('TagsController@index'));
+        Breadcrumbs::addCrumb($tag->name);
+
+        // return the view
+        return View::make('tags.show', compact('tag'));
 	}
 
 	/**
@@ -90,7 +97,14 @@ class TagsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$tag = Tag::findOrFail($id);
+
+        // setup BreadCrumbs
+        Breadcrumbs::addCrumb('All Tags', action('TagsController@index'));
+        Breadcrumbs::addCrumb($tag->name);
+
+        // return the view
+        return View::make('tags.edit', compact('tag'));
 	}
 
 	/**
@@ -101,7 +115,17 @@ class TagsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		// setup my rules for validation
+        $validator = Validator::make($data = Input::all(), Tag::$rules);
+        // check validation
+        if ($validator->fails())
+        {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        Tag::findOrFail($id)->update($data);
+
+        return Redirect::route('tags.index');
 	}
 
 	/**
