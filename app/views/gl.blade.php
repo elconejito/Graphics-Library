@@ -11,8 +11,9 @@
 				<h1>Graphics Library</h1>
 			</div>
 		</div>
+		
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<h3>Projects<br /><small>Browse by Project</small></h3>
 				<ul class="list-group">
 				@if ( count($projects) > 0 )
@@ -25,7 +26,7 @@
 				@endif
 				</ul>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<h3>Agencies<br /><small>Browse by Agency</small></h3>
 				<ul class="list-group">
 				@if ( count($agencies) > 0 )
@@ -38,7 +39,7 @@
 				@endif
 				</ul>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<h3>Tags<br /><small>Browse by Tag</small></h3>
 				<ul class="list-group">
 				@if ( count($tags) > 0 )
@@ -50,6 +51,10 @@
 				    <li class="list-group-item">No Tags</li>
 				@endif
 				</ul>
+			</div>
+			<div class="col-md-3">
+				<h3>Search<br /><small>Browse by Project</small></h3>
+				@include('components.forms.search')
 			</div>
 		</div>  <!-- /row -->
 	</div>
