@@ -52,7 +52,23 @@ class TagsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		// setup my rules for validation
+        $validator = Validator::make($data = Input::all(), Tag::$rules);
+        // check validation
+	    if ($validator->fails())
+	    {
+	        return Redirect::back()->withErrors($validator)->withInput();
+	    }
+	    
+	    $data['name'] = Purifier::clean($data['name'],'text');
+	    
+        Tag::create($data);
+
+	    if ( Input::has('new') ) :
+	        return Redirect::route('tags.create');
+	    else :
+	        return Redirect::route('tags.index');
+	    endif;
 	}
 
 	/**

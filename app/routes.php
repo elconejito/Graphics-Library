@@ -35,9 +35,13 @@ Route::get('/gl', ['as' => 'gl', function() {
         ->take(5)
         ->get();
     $agencies = Agency::orderby('shortname')
+        ->take(5)
+        ->get();
+    $tags = Tag::orderby('name')
+        ->take(5)
         ->get();
     
-    return View::make('gl', compact('projects','agencies'));
+    return View::make('gl', compact('projects','agencies','tags'));
     
 }])->before('auth');
 

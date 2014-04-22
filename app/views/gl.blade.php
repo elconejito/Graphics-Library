@@ -39,8 +39,17 @@
 				</ul>
 			</div>
 			<div class="col-md-4">
-				<h3>Search</h3>
-				<p>search here</p>
+				<h3>Tags<br /><small>Browse by Tag</small></h3>
+				<ul class="list-group">
+				@if ( count($tags) > 0 )
+				    @foreach ( $tags as $tag )
+				    <li class="list-group-item">{{ link_to_action('TagsController@show', $tag->name, array('id'=>$tag->id)) }}</li>
+				    @endforeach
+                    <li class="list-group-item list-group-item-info">{{ link_to_action('TagsController@index', 'browse all Tags') }}</li>
+				@else
+				    <li class="list-group-item">No Tags</li>
+				@endif
+				</ul>
 			</div>
 		</div>  <!-- /row -->
 	</div>
