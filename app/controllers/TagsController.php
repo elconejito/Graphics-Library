@@ -65,9 +65,9 @@ class TagsController extends \BaseController {
         Tag::create($data);
 
 	    if ( Input::has('new') ) :
-	        return Redirect::route('tags.create');
+	        return Redirect::route('tags.create')->with('message', 'The tag &quot;'.$data['name'].'&quot; has been created.');
 	    else :
-	        return Redirect::route('tags.index');
+	        return Redirect::route('tags.index')->with('message', 'The tag &quot;'.$data['name'].'&quot; has been created.');
 	    endif;
 	}
 
@@ -125,7 +125,7 @@ class TagsController extends \BaseController {
 
         Tag::findOrFail($id)->update($data);
 
-        return Redirect::route('tags.index');
+        return Redirect::route('tags.index')->with('message', 'The tag &quot;'.$data['name'].'&quot; has been updated.');
 	}
 
 	/**
