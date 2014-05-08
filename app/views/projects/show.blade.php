@@ -13,9 +13,9 @@
     </div>
     <div class="row">
         <div class="col-md-8">
-            @if ( count($graphics) > 0 )
+            @if ( $project->graphics->count() > 0 )
             <div class="navigation">
-                <p>{{ $graphics->count() }} of {{ $project->countGraphics() }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
+                <p>{{ $graphics->count() }} of {{ $project->graphics->count() }} graphics ({{ link_to_action('GraphicsController@index', 'view all', array('project_id'=>$project->id)) }})</p>
             </div>
                 @foreach ( $graphics as $graphic )
             <div class="col-md-4">
@@ -42,7 +42,7 @@
                 <div class="panel-body">
                     <div class="btn-group actions">
                         <a href="{{ action('GraphicsController@create',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> graphic</a>
-                        @if ( !$cover )<a href="{{ action('CoversController@create', ['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> cover</a>@endif
+                        @if ( !$project->cover )<a href="{{ action('CoversController@create', ['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-plus"></span> cover</a>@endif
                         <a href="{{ action('ProjectsController@edit',['project_id'=>$project->id]) }}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-pencil"></span> edit</a>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     <li class="list-group-item"><strong>Short Name</strong>: {{ $project->shortname }}</li>
                     <li class="list-group-item"><strong>Date Submitted</strong>: {{ $project->submit_date }}</li>
                     <li class="list-group-item"><strong>Win/Loss</strong>: {{ $project->arWinLoss[$project->winloss] }}</li>
-                    <li class="list-group-item"><strong>Agency</strong>: {{ link_to_action('AgenciesController@show', $agencies[$project->agency], $project->agency) }}</li>
+                    <li class="list-group-item"><strong>Agency</strong>: {{ link_to_action('AgenciesController@show', $project->agency->name, $project->agency->id) }}</li>
                     <li class="list-group-item"><strong>Tags</strong>:</li>
                 </ul>
             </div>
@@ -67,8 +67,8 @@
                     <h3 class="panel-title">Proposal Cover</h3>
                 </div>
                 <div class="panel-body">
-                    @if ( $cover )
-                    <a href="{{ action('CoversController@show', [ $project->id,$cover->id ]) }}" ><img src="{{ asset($cover->getImageThumbnailPath()) }}" alt="{{ $project->name }}" class="img-responsive"></a>
+                    @if ( $project->cover )
+                    <a href="{{ action('CoversController@show', [ $project->id,$project->cover->id ]) }}" ><img src="{{ asset($project->cover->getImageThumbnailPath()) }}" alt="{{ $project->name }}" class="img-responsive"></a>
                     @else
                     <p>Sorry, there is no cover.</p>
                     @endif

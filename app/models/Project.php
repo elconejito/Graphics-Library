@@ -31,6 +31,10 @@ class Project extends \Eloquent {
         return $this->belongsToMany('Tag');
     }
     
+    public function agency() {
+        return $this->belongsTo('Agency');
+    }
+    
     public function getGraphicFolderPath() {
         // get the root for this project
         $path = public_path().'/data/'.$this->graphicsfolder.'/';
@@ -47,5 +51,11 @@ class Project extends \Eloquent {
 
     public function countGraphics() {
         return Graphic::where('project_id','=',$this->id)->count();
+    }
+    
+    public function scopeSearch($query, $search) {
+        return $query->where('name', 'LIKE', "%$search%")
+            ->orWhere('shortname', 'LIKE', "%$search%")
+            ->orWhere('description', 'LIKE', "%$search%");
     }
 }

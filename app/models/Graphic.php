@@ -20,6 +20,12 @@ class Graphic extends \Eloquent {
     public function tags() {
 	    return $this->belongsToMany('Tag');
 	}
+	
+	public function scopeSearch($query, $search) {
+        return $query->where('title', 'LIKE', "%$search%")
+            ->orWhere('control_number', 'LIKE', "%$search%")
+            ->orWhere('description', 'LIKE', "%$search%");
+    }
 
     public function getImageFullsizePath() {
         // get the project so we can get it's folder

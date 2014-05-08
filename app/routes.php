@@ -51,6 +51,27 @@ Route::get('/admin', ['as' => 'admin', function() {
     
 }])->before('auth');
 
+Route::get('/search', ['as' => 'search', function() {
+    $query = Request::get('q');
+    
+    if ( $query ) {
+        $projects = Project::search($query)
+            ->take(5)
+            ->get();
+        $agencies = Agency::search($query)
+            ->take(5)
+            ->get();
+        $tags = Tag::search($query)
+            ->take(5)
+            ->get();
+        $graphics = Graphic::search($query)
+            ->take(5)
+            ->get();
+    }
+    return View::make('search', compact('projects','agencies','tags','graphics'));
+    
+}])->before('auth');
+
 
 /*
  * Routes to resources

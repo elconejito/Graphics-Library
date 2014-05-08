@@ -16,4 +16,8 @@ class Tag extends \Eloquent {
 	public function graphics() {
 	    return $this->belongsToMany('Graphic');
 	}
+	
+	public function scopeSearch($query, $search) {
+        return $query->where('name', 'LIKE', "%$search%");
+    }
 }

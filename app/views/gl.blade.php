@@ -53,7 +53,7 @@
 				</ul>
 			</div>
 			<div class="col-md-3">
-				<h3>Search<br /><small>Browse by Project</small></h3>
+				<h3>Search<br /><small>Search by Keyword</small></h3>
 				@include('components.forms.search')
 			</div>
 		</div>  <!-- /row -->

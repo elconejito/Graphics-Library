@@ -77,10 +77,20 @@ class ProjectsController extends \BaseController {
             if ( ! File::makeDirectory($dirPath) ) {
                 return Redirect::back()->withInput()->message('Could not create directory');
             };
-
-        // save the project
-	    Project::create($data);
-
+        
+        // we need the agency for association
+        $agency = Agency::find($data['agency']);
+        unset($data['agency']);     // remove this entry so it's not saved into the Model
+        
+        // create the new Project pre-loaded with data from Input
+        $project = new Project($data);
+        // associate the project with an agency
+	    $project->agency()->associate($agency);
+	    
+	    // save the project
+	    $project->save();
+        
+        // redirect back to the index
 	    return Redirect::route('projects.index');
 	}
 
@@ -93,17 +103,18 @@ class ProjectsController extends \BaseController {
 	public function show($id)
 	{
 	    $project = Project::findOrFail($id);
-	    $graphics = Graphic::where('project_id','=',$id)->take(6)->get();
+	    $graphics = $project->graphics()->take(6)->get();
+        /*
 	    $cover = Cover::where('project_id','=',$id)->first();
         $agencies = Agency::orderby('name')
             ->lists('name','id');
-
+        */
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname);
 
         // return the view
-	    return View::make('projects.show', compact('project','graphics','cover','agencies'));
+	    return View::make('projects.show', compact('project','graphics'));
 	}
 
 	/**
@@ -150,8 +161,15 @@ class ProjectsController extends \BaseController {
         {
             return Redirect::back()->withErrors($validator)->withInput();
         }
-
-		$project->update($data);
+        
+        // we need the agency for association
+        $agency = Agency::find($data['agency']);
+        unset($data['agency']);     // remove this entry so it's not saved into the Model
+        
+        // associate the project with an agency
+	    $project->agency()->associate($agency);
+	    
+	    $project->update($data);
 
 		return Redirect::action('ProjectsController@show', [$id])->with('message','Changes have been saved.');
 	}
@@ -167,10 +185,6 @@ class ProjectsController extends \BaseController {
 		Project::destroy($id);
 
 		return Redirect::route('projects.index');
-	}
-	
-	public function countGraphics() {
-	    return Graphic::where('project_id','=',$this->id)->count();
 	}
 	
 	public function getGraphics() {
