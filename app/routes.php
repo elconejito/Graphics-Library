@@ -55,20 +55,12 @@ Route::get('/search', ['as' => 'search', function() {
     $query = Request::get('q');
     
     if ( $query ) {
-        $projects = Project::search($query)
-            ->take(5)
-            ->get();
-        $agencies = Agency::search($query)
-            ->take(5)
-            ->get();
-        $tags = Tag::search($query)
-            ->take(5)
-            ->get();
-        $graphics = Graphic::search($query)
-            ->take(5)
-            ->get();
+        $projects = Project::search($query)->get();
+        $agencies = Agency::search($query)->get();
+        $tags = Tag::search($query)->get();
+        $graphics = Graphic::search($query)->get();
     }
-    return View::make('search', compact('projects','agencies','tags','graphics'));
+    return View::make('search', compact('projects','agencies','tags','graphics','query'));
     
 }])->before('auth');
 
