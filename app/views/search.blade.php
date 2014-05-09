@@ -18,68 +18,40 @@
 		</div>
 		<div class="row">
     		<div class="col-md-8">
-    			<h2>Graphics</h2>
+    			<h2>Graphics<br /><small>{{ $graphics->count() }} matches</small></h2>
                 @if ( $graphics->count() > 0 )
-                <div class="navigation">
-                    <p>{{ $graphics->count() }} of {{ Graphic::count() }} graphics match</p>
-                </div>
                 <ul class="list-group">
                     @foreach ( $graphics as $graphic )
                     <li class="list-group-item">{{ link_to_action('GraphicsController@show', $graphic->title, array('project_id'=>$graphic->project->id, 'id'=>$graphic->id)) }}</li>
                     @endforeach
                 </ul>
-                @else
-                <div class="navigation">
-                    <p>0 of {{ Graphic::count() }} graphics match</p>
-                </div>
                 @endif
     			
-    			<h2>Projects</h2>
+    			<h2>Projects<br /><small>{{ $projects->count() }} matches</small></h2>
     			@if ( $projects->count() > 0 )
-                <div class="navigation">
-                    <p>{{ $projects->count() }} of {{ Project::count() }} projects match</p>
-                </div>
                 <ul class="list-group">
                     @foreach ( $projects as $project )
                     <li class="list-group-item">{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
                     @endforeach
                 </ul>
-                @else
-                <div class="navigation">
-                    <p>0 of {{ Project::count() }} projects match</p>
-                </div>
                 @endif
     			
-    			<h2>Tags</h2>
+    			<h2>Tags<br /><small>{{ $tags->count() }} matches</small></h2>
                 @if ( $tags->count() > 0 )
-                <div class="navigation">
-                    <p>{{ $tags->count() }} of {{ Tag::count() }} tags match</p>
-                </div>
                 <ul class="list-group">
                     @foreach ( $tags as $tag )
-                    <li class="list-group-item">{{ link_to_action('TagsController@show', $tag->title, array('id'=>$tag->id)) }}</li>
+                    <li class="list-group-item">{{ link_to_action('TagsController@show', $tag->name, array('id'=>$tag->id)) }}</li>
                     @endforeach
                 </ul>
-                @else
-                <div class="navigation">
-                    <p>0 of {{ Tag::count() }} tags match</p>
-                </div>
                 @endif
     			
-    			<h2>Agencies</h2>
+    			<h2>Agencies<br /><small>{{ $agencies->count() }} matches</small></h2>
                 @if ( $agencies->count() > 0 )
-                <div class="navigation">
-                    <p>{{ $agencies->count() }} of {{ Agency::count() }} agencies match</p>
-                </div>
                 <ul class="list-group">
                     @foreach ( $agencies as $agency )
-                    <li class="list-group-item">{{ link_to_action('AgencyController@show', $agency->name, array('id'=>$agency->id)) }}</li>
+                    <li class="list-group-item">{{ link_to_action('AgenciesController@show', $agency->name, array('id'=>$agency->id)) }}</li>
                     @endforeach
                 </ul>
-                @else
-                <div class="navigation">
-                    <p>0 of {{ Agency::count() }} agencies match</p>
-                </div>
                 @endif
     		</div>
     		<div class="col-md-4">
