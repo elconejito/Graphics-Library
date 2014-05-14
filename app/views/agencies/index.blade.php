@@ -17,11 +17,28 @@
             <div class="navigation">
                 <p>{{ $agencies->count() }} Agencies</p>
             </div>
-            <ul class="list-group">
-                @foreach ( $agencies as $agency )
-                <li class="list-group-item">[{{ $agency->shortname }}] {{ link_to_action('AgenciesController@show', $agency->name, $agency->id) }} <a href="{{ action('AgenciesController@edit', $agency->id) }}" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-pencil"></span></a></li>
-                @endforeach
-            <ul>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Abbrev</th>
+                        <th>Agency Name</th>
+                        <th># of Projects</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ( $agencies as $agency )
+                    <tr>
+                        <td><a href="{{ action('AgenciesController@edit', $agency->id) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td>{{ $agency->shortname }}</td>
+                        <td>{{ link_to_action('AgenciesController@show', $agency->name, $agency->id) }}</td>
+                        <td>{{ $agency->projects()->count() }}</td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
             @else
             <p>Sorry, there are no agencies here</p>
             @endif
