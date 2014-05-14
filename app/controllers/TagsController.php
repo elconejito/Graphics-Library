@@ -24,7 +24,7 @@ class TagsController extends \BaseController {
 		// setup BreadCrumbs
 	    Breadcrumbs::addCrumb('All Tags');
 	    
-	    $tags = Tag::all();
+	    $tags = Tag::paginate(10);
 	    
 		// return the view
 		return View::make('tags.index', compact('tags'));

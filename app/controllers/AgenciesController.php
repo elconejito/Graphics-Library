@@ -26,7 +26,7 @@ class AgenciesController extends \BaseController {
 	    
 		// return the view
 		return View::make('agencies.index', [
-		    "agencies" => Agency::all()
+		    "agencies" => Agency::paginate(10)
 		    ]
 		);
 	}
