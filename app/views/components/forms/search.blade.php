@@ -11,8 +11,5 @@
 	    {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
     </span>
 </div>
-<div class="form-group">
-	
-</div>
 
 {{ Form::close() }}

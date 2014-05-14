@@ -14,6 +14,12 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="{{ URL::to('gl') }}">Graphics Library</a></li>
 			</ul>
+            {{ Form::open( [ 'url' => 'search', 'method' => 'GET', 'class' => 'navbar-form navbar-left' ] ) }}
+                <div class="form-group">
+                    {{ Form::text('q', Input::old('q'), array('class' => 'form-control', 'placeholder'=>'Enter Keyword')) }}
+                </div>
+                {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
+            {{ Form::close() }}
 			<ul class="nav navbar-nav navbar-right">
                 @if( Auth::check() )
                 <li>{{ link_to('admin', 'Admin') }}</li>
