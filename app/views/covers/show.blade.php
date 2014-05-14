@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             {{ Breadcrumbs::render() }}
-            <h1><small>{{ $project->name }}</small><br />Cover</h1>
+            <h1><small>{{ $cover->project->agency->name }}<br />{{ $cover->project->name }}</small><br />Cover</h1>
         </div>
     </div>
     <div class="row">

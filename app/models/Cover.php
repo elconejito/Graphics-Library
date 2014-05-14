@@ -9,6 +9,10 @@ class Cover extends \Eloquent {
     
 	protected $fillable = ['project_id','image'];
 	
+	public function project() {
+        return $this->hasOne('Project');
+    }
+	
 	public function getImageFullsizePath() {
         // get the project so we can get it's folder
         $project = Project::find($this->project_id);

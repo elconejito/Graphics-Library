@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             {{ Breadcrumbs::render() }}
-            <h1><small>Project</small><br />{{ $project->name }}</h1>
+            <h1><small>{{ $project->agency->name }}</small><br />{{ $project->name }}</h1>
         </div>
     </div>
     <div class="row">
@@ -20,11 +20,11 @@
                 @foreach ( $graphics as $graphic )
             <div class="col-md-4">
                 <div class="thumbnail">
-                    <a href="{{ action('GraphicsController@show', [$graphic->project_id,$graphic->id]) }}" >
+                    <a href="{{ action('GraphicsController@show', [ $project->id, $graphic->id ]) }}" >
                         <img src="{{ asset($graphic->getImageThumbnailPath()) }}" alt="{{ $graphic->title }}" class="img-responsive">
                     </a>
                     <div class="caption">
-                        <h3><a href="{{ action('GraphicsController@show', [$graphic->project_id,$graphic->id]) }}" >{{ $graphic->title }}</a><br />
+                        <h3><a href="{{ action('GraphicsController@show', [ $project->id, $graphic->id ]) }}" >{{ $graphic->title }}</a><br />
                             <small>{{ $graphic->control_number }}</small></h3>
                     </div>
                 </div>

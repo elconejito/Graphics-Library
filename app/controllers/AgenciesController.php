@@ -75,7 +75,7 @@ class AgenciesController extends \BaseController {
 	public function show($id)
 	{
         $agency = Agency::findOrFail($id);
-        $projects = Project::where('agency',$id)->paginate(10);
+        $projects = $agency->projects()->paginate(10);
 
         // setup BreadCrumbs
         Breadcrumbs::addCrumb('All Agencies', action('AgenciesController@index'));

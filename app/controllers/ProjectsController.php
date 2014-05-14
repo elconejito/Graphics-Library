@@ -104,11 +104,7 @@ class ProjectsController extends \BaseController {
 	{
 	    $project = Project::findOrFail($id);
 	    $graphics = $project->graphics()->take(6)->get();
-        /*
-	    $cover = Cover::where('project_id','=',$id)->first();
-        $agencies = Agency::orderby('name')
-            ->lists('name','id');
-        */
+        
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname);

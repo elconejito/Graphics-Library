@@ -74,7 +74,8 @@ class GraphicsController extends \BaseController {
 	    }
 
         // pull in the project
-        $project = Project::findOrFail(Input::get('project_id'));
+        $project = Project::findOrFail($data['project_id']);
+        unset($data['project_id']);     // remove this entry so it's not saved into the Model
         
         // process the image
         $image = Image::make(Input::file('image')->getRealPath());
@@ -90,8 +91,15 @@ class GraphicsController extends \BaseController {
 
         // take the image object out of inputted data array and replace with new filename before saving
         $data["image"] = $save_name;
-
-	    Graphic::create($data);
+        
+        // create the graphic with loaded data
+        $graphic = new Graphic($data);
+        
+        // associate the graphic with a project
+	    $graphic->project()->associate($project);
+	    
+	    // and save
+	    $graphic->save();
 	    
 	    if ( Input::has('new') ) :
 	        return Redirect::route('projects.graphics.create', array('project'=>$project->id));
@@ -188,6 +196,8 @@ class GraphicsController extends \BaseController {
                     $save_path . 'thumbnail/' . $new_name
                 );
             $data["image"] = $new_name;
+        } else {
+            $data["image"] = $graphic->image;
         }
         
         // if there is an image attached, upload it to replace current
