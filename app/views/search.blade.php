@@ -22,7 +22,7 @@
                 @if ( $graphics->count() > 0 )
                 <ul class="list-group">
                     @foreach ( $graphics as $graphic )
-                    <li class="list-group-item">{{ link_to_action('GraphicsController@show', $graphic->title, array('project_id'=>$graphic->project->id, 'id'=>$graphic->id)) }}</li>
+                    <li class="list-group-item">{{ link_to_action('GraphicsController@show', $graphic->control_number .'_'. $graphic->title, array('project_id'=>$graphic->project->id, 'id'=>$graphic->id)) }}</li>
                     @endforeach
                 </ul>
                 @endif
@@ -31,7 +31,7 @@
     			@if ( $projects->count() > 0 )
                 <ul class="list-group">
                     @foreach ( $projects as $project )
-                    <li class="list-group-item">{{ link_to_action('ProjectsController@show', $project->name, array('id'=>$project->id)) }}</li>
+                    <li class="list-group-item">{{ link_to_action('ProjectsController@show', $project->agency->shortname .' '. $project->name, array('id'=>$project->id)) }} <span class="badge">{{ $project->graphics()->count() }} <span class="glyphicon glyphicon-picture"></span></span></li>
                     @endforeach
                 </ul>
                 @endif
@@ -40,7 +40,7 @@
                 @if ( $tags->count() > 0 )
                 <ul class="list-group">
                     @foreach ( $tags as $tag )
-                    <li class="list-group-item">{{ link_to_action('TagsController@show', $tag->name, array('id'=>$tag->id)) }}</li>
+                    <li class="list-group-item">{{ link_to_action('TagsController@show', $tag->name, array('id'=>$tag->id)) }} <span class="badge">{{ $tag->graphics()->count() }} <span class="glyphicon glyphicon-picture"></span></span> <span class="badge">{{ $tag->projects()->count() }} <span class="glyphicon glyphicon-book"></span></span></li>
                     @endforeach
                 </ul>
                 @endif
@@ -49,7 +49,7 @@
                 @if ( $agencies->count() > 0 )
                 <ul class="list-group">
                     @foreach ( $agencies as $agency )
-                    <li class="list-group-item">{{ link_to_action('AgenciesController@show', $agency->name, array('id'=>$agency->id)) }}</li>
+                    <li class="list-group-item">{{ link_to_action('AgenciesController@show', $agency->name, array('id'=>$agency->id)) }} <span class="badge">{{ $agency->projects()->count() }} <span class="glyphicon glyphicon-book"></span></span></li>
                     @endforeach
                 </ul>
                 @endif
