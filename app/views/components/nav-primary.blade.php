@@ -8,11 +8,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<span class="navbar-brand">DevBox</span>
+			<span class="navbar-brand">Graphics Library</span>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="{{ URL::to('gl') }}">Graphics Library</a></li>
+				<li class="active"><a href="{{ URL::to('gl') }}">Dashboard</a></li>
 			</ul>
             {{ Form::open( [ 'url' => 'search', 'method' => 'GET', 'class' => 'navbar-form navbar-left' ] ) }}
                 <div class="form-group">
