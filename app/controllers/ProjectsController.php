@@ -124,6 +124,9 @@ class ProjectsController extends \BaseController {
 		$project = Project::findOrFail($id);
 		$agencies = Agency::orderby('name')
             ->lists('name','id');
+            
+        // clean out the date if empty
+        if ( $project->submit_date == '0000-00-00' ) $project->submit_date = '';
 
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb($project->shortname, action('ProjectsController@show', [$id]));

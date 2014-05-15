@@ -19,9 +19,9 @@
             @if( count($errors->all()) > 0 )
                 @include('components.errors')
             @endif
-
+            
             @include('projects.components.form')
-
+            
             {{ Form::close() }}
         </div>
         <div class="col-md-4">
