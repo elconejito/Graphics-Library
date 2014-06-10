@@ -19,6 +19,7 @@ $(document).ready(function () {
 
     /*
      * #modal functions
+     * ===================
      */
     // make sure to remove data from modals when closed
     $(document).on('hidden.bs.modal', function (e) {
@@ -93,7 +94,43 @@ $(document).ready(function () {
                 }
             }, "json"	// END function
         );	// END $.post(
+    });     // END $('.modal').on('click', 'button.post', function(e) {
+    
+    /*
+     * #tag functions
+     * ===================
+     */
+    var tagApi = $("#tags").tagsManager();
+    // release the hounds!
+    var engine = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: 'http://graphics.harvsworld.com/search/tags/json?q=%QUERY',
+            filter: function (response) {
+                // parsedResponse is the array returned from your backend
+                console.log(response);
+                
+                // do whatever processing you need here
+                return response;
+            }
+        }
     });
+    // engine.initialize();
+    engine.initialize();
+
+    $("#tags").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 3
+        },
+        {
+        name: 'tags',
+        limit: 5,
+        displayKey: 'value',
+        source: engine.ttAdapter()
+    });
+    
 }); // #END $(document).ready
 
 function displayAlert($type,$message,$location) {

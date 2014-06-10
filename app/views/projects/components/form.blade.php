@@ -54,7 +54,7 @@
             <div class="form-group">
                 {{ Form::label('tags','Tags', array('class' => 'control-label col-md-3')) }}
                 <div class="col-md-9">
-                    {{ Form::text('tags', null, array('class' => 'form-control', 'placeholder'=>'Tags')) }}
+                    {{ Form::text('tags', null, array('class' => 'form-control tm-input', 'placeholder'=>'Tags')) }}
                 </div>
             </div>
 

@@ -24,7 +24,8 @@
 			"app/tests/TestCase.php"
 		],
         "psr-0": {
-            "Illuminate": "src/"
+            "Illuminate": "src/",
+            "Graphics": "app/"
         }
 	},
 	"scripts": {

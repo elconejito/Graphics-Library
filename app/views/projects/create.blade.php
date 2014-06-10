@@ -3,6 +3,12 @@
 @section('meta_description', 'Add Project :: Graphics Library')
 @section('meta_title', 'Add Project :: Graphics Library')
 
+@section('js')
+    @parent
+    {{ HTML::script('js/tagmanager.js') }}
+    {{ HTML::script('js/typeahead.jquery.js') }}
+@stop
+
 @section('content')
 <div class="container">
     <div class="row">

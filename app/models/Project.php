@@ -10,14 +10,15 @@ class Project extends \Eloquent {
     // Add your validation rules here
     public static $rules = [
         'name' => 'required',
-        'control_prefix' => 'required|alpha_num',
         'shortname' => 'required',
+        'control_prefix' => 'required|alpha_num',
         'submit_date' => 'date',
-        'winloss' => 'integer'
+        'winloss' => 'required|integer',
+        'agency_id' => 'required|integer'
     ];
 
     // Don't forget to fill this array
-    protected $fillable = ['agency','name','shortname','control_prefix','description','graphicsfolder','submit_date','winloss'];
+    protected $fillable = ['name','shortname','control_prefix','description','graphicsfolder','submit_date','winloss'];
     
     public function cover() {
         return $this->hasOne('Cover');

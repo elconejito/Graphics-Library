@@ -79,8 +79,8 @@ class ProjectsController extends \BaseController {
             };
         
         // we need the agency for association
-        $agency = Agency::find($data['agency']);
-        unset($data['agency']);     // remove this entry so it's not saved into the Model
+        $agency = Agency::find($data['agency_id']);
+        unset($data['agency_id']);     // remove this entry so it's not saved into the Model
         
         // create the new Project pre-loaded with data from Input
         $project = new Project($data);
@@ -162,8 +162,8 @@ class ProjectsController extends \BaseController {
         }
         
         // we need the agency for association
-        $agency = Agency::find($data['agency']);
-        unset($data['agency']);     // remove this entry so it's not saved into the Model
+        $agency = Agency::find($data['agency_id']);
+        unset($data['agency_id']);     // remove this entry so it's not saved into the Model
         
         // associate the project with an agency
 	    $project->agency()->associate($agency);

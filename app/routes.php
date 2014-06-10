@@ -51,18 +51,7 @@ Route::get('/admin', ['as' => 'admin', function() {
     
 }])->before('auth');
 
-Route::get('/search', ['as' => 'search', function() {
-    $query = Request::get('q');
-    
-    if ( $query ) {
-        $projects = Project::search($query)->get();
-        $agencies = Agency::search($query)->get();
-        $tags = Tag::search($query)->get();
-        $graphics = Graphic::search($query)->get();
-    }
-    return View::make('search', compact('projects','agencies','tags','graphics','query'));
-    
-}])->before('auth');
+Route::get('/search/{type?}/{format?}', ['as' => 'search', 'uses' => 'SearchController@index'])->before('auth');
 
 
 /*

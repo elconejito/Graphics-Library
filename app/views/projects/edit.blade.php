@@ -3,6 +3,15 @@
 @section('meta_description', 'Edit Project :: Graphics Library')
 @section('meta_title', 'Edit Project :: Graphics Library')
 
+@section('js')
+    <!-- jQuery 2.0.3 -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	{{ HTML::script('js/bootstrap.min.js') }}
+    {{ HTML::script('js/typeahead.bundle.min.js') }}
+    {{ HTML::script('js/tagmanager.js') }}
+    {{ HTML::script('js/main.js') }}
+@stop
+
 @section('content')
 <div class="container">
     <div class="row">
