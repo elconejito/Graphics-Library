@@ -39,7 +39,7 @@ body {
     margin: 0;
 }
 
-.toolbar a.btn {
+.toolbar .btn {
     padding: 8px 16px;
 }
 
