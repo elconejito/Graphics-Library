@@ -53,8 +53,9 @@
             
             <div class="form-group">
                 {{ Form::label('tags','Tags', array('class' => 'control-label col-md-3')) }}
-                <div class="col-md-9">
-                    {{ Form::text('tags', null, array('class' => 'form-control tm-input', 'placeholder'=>'Tags')) }}
+                <div class="col-md-9 tm-group">
+                    <div class="tags-container"></div>
+                    {{ Form::text('tags', null, array('class' => 'form-control tm-input tm-input-info', 'placeholder'=>'Tags', 'autocomplete'=>'off')) }}
                 </div>
             </div>
 

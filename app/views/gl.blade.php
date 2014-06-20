@@ -51,6 +51,7 @@
 				    <li class="list-group-item">No Tags</li>
 				@endif
 				</ul>
+            </div>
 		</div>  <!-- /row -->
 	</div>
 	

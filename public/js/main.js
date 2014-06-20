@@ -100,13 +100,18 @@ $(document).ready(function () {
      * #tag functions
      * ===================
      */
-    var tagApi = $("#tags").tagsManager();
+    var tagApi = $("#tags").tagsManager({
+        delimiters: [13, 44], // tab, enter, comma
+        tagsContainer: '.tags-container',
+        CapitalizeFirstLetter: true,
+        backspace: []
+    });
     // release the hounds!
     var engine = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'http://graphics.harvsworld.com/search/tags/json?q=%QUERY',
+            url: '/search/tags/json?q=%QUERY',
             filter: function (response) {
                 // parsedResponse is the array returned from your backend
                 console.log(response);
@@ -119,7 +124,7 @@ $(document).ready(function () {
     // engine.initialize();
     engine.initialize();
 
-    $("#tags").typeahead({
+    tagApi.typeahead({
         highlight: true,
         minLength: 2
         },
