@@ -168,6 +168,13 @@ class ProjectsController extends \BaseController {
         // associate the project with an agency
 	    $project->agency()->associate($agency);
 	    
+	    // dd($data);
+	    // add tags if any
+	    $tags = explode(',', $data["hidden-tags"]);
+	    unset($data['hidden-tags']);     // remove this entry so it's not saved into the Model
+	    unset($data['tags']);     // remove this entry so it's not saved into the Model
+	    $project->tags()->sync($tags);
+	    
 	    $project->update($data);
 
 		return Redirect::action('ProjectsController@show', [$id])->with('message','Changes have been saved.');

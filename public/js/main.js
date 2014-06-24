@@ -103,7 +103,6 @@ $(document).ready(function () {
     var tagApi = $("#tags").tagsManager({
         delimiters: [13, 44], // tab, enter, comma
         tagsContainer: '.tags-container',
-        CapitalizeFirstLetter: true,
         backspace: []
     });
     // release the hounds!

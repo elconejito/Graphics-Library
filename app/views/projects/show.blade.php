@@ -59,7 +59,7 @@
                     <li class="list-group-item"><strong>Date Submitted</strong>: {{ $project->submit_date }}</li>
                     <li class="list-group-item"><strong>Win/Loss</strong>: {{ $project->arWinLoss[$project->winloss] }}</li>
                     <li class="list-group-item"><strong>Agency</strong>: {{ link_to_action('AgenciesController@show', $project->agency->name, $project->agency->id) }}</li>
-                    <li class="list-group-item"><strong>Tags</strong>:</li>
+                    <li class="list-group-item"><strong>Tags: {{ $project->tags }}</strong>:</li>
                 </ul>
             </div>
             <div class="panel panel-default">
