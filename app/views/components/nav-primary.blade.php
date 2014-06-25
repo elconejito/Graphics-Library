@@ -12,7 +12,10 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="{{ URL::to('gl') }}">Dashboard</a></li>
+                <li class="active"><a href="{{ URL::to('gl') }}">Dashboard</a></li>
+                <li><a href="{{ URL::to('projects') }}">Projects</a></li>
+                <li><a href="{{ URL::to('agencies') }}">Agencies</a></li>
+                <li><a href="{{ URL::to('tags') }}">Tags</a></li>
 			</ul>
             {{ Form::open( [ 'url' => 'search', 'method' => 'GET', 'class' => 'navbar-form navbar-left' ] ) }}
                 <div class="form-group">
