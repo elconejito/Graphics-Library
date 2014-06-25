@@ -168,10 +168,9 @@ class ProjectsController extends \BaseController {
         // associate the project with an agency
 	    $project->agency()->associate($agency);
 	    
-	    // dd($data);
 	    // add tags if any
-	    $tags = explode(',', $data["hidden-tags"]);
-	    unset($data['hidden-tags']);     // remove this entry so it's not saved into the Model
+	    $tags = $project->getTagsByString(explode(',', $data["hidden-tags-input"]));
+	    unset($data['hidden-tags-input']);     // remove this entry so it's not saved into the Model
 	    unset($data['tags']);     // remove this entry so it's not saved into the Model
 	    $project->tags()->sync($tags);
 	    

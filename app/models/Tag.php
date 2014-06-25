@@ -20,4 +20,11 @@ class Tag extends \Eloquent {
 	public function scopeSearch($query, $search) {
         return $query->where('name', 'LIKE', "%$search%");
     }
+
+    /**
+     * @return string
+     */
+    public function toHTML() {
+        return '<span class="tm-tag"><span><a href="'.action('TagsController@show', $this->id).'">'.$this->name.'</a></span></span>';
+    }
 }

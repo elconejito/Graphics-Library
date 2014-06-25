@@ -53,10 +53,40 @@ class Project extends \Eloquent {
     public function countGraphics() {
         return Graphic::where('project_id','=',$this->id)->count();
     }
-    
+
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed
+     */
     public function scopeSearch($query, $search) {
         return $query->where('name', 'LIKE', "%$search%")
             ->orWhere('shortname', 'LIKE', "%$search%")
             ->orWhere('description', 'LIKE', "%$search%");
+    }
+
+    /**
+     * @param array $ids
+     * @return mixed
+     */
+    public function getTagsById(Array $ids) {
+        return Tag::whereIn('id', $ids)->get();
+    }
+
+    /**
+     * @param array $strings
+     * @return mixed
+     */
+    public function getTagsByString(Array $strings) {
+        return Tag::whereIn('name', $strings)->get();
+    }
+
+    /**
+     * @return string
+     */
+    public function tagsToString() {
+        $tags = $this->tags->lists('name');
+        // return '["'.implode('","', $tags).'"]';
+        return ','.implode(',', $tags);
     }
 }

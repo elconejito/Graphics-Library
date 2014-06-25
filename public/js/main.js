@@ -100,40 +100,48 @@ $(document).ready(function () {
      * #tag functions
      * ===================
      */
-    var tagApi = $("#tags").tagsManager({
-        delimiters: [13, 44], // tab, enter, comma
-        tagsContainer: '.tags-container',
-        backspace: []
-    });
-    // release the hounds!
-    var engine = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: '/search/tags/json?q=%QUERY',
-            filter: function (response) {
-                // parsedResponse is the array returned from your backend
-                console.log(response);
-                
-                // do whatever processing you need here
-                return response;
-            }
-        }
-    });
-    // engine.initialize();
-    engine.initialize();
+    if ( $("#tags-input").length ) {
+        var tagApi = $("#tags-input").tagsManager({
+            prefilled: $('#tags-prefilled').val(),
+            delimiters: [13, 44], // tab, enter, comma
+            tagsContainer: '.tags-container',
+            backspace: []
+        });
 
-    tagApi.typeahead({
-        highlight: true,
-        minLength: 2
-        },
-        {
-        name: 'tags',
-        limit: 5,
-        displayKey: 'value',
-        source: engine.ttAdapter()
-    });
-    
+        // release the hounds!
+        var engine = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: '/search/tags/json?q=%QUERY',
+                filter: function (response) {
+                    // parsedResponse is the array returned from your backend
+                    console.log(response);
+                    // do whatever processing you need here
+                    return response;
+                }
+            }
+        });
+        // engine.initialize();
+        engine.initialize();
+
+        tagApi.typeahead(
+            {
+                highlight: true,
+                hint: false,
+                minLength: 2
+            },
+            {
+                name: 'tags',
+                limit: 5,
+                displayKey: 'value',
+                source: engine.ttAdapter()
+            }
+        ).on('typeahead:selected', function (e, s) {
+                console.log('typeahead:selected fired');
+                tagApi.typeahead('val', '');
+            });
+    }
 }); // #END $(document).ready
 
 function displayAlert($type,$message,$location) {
