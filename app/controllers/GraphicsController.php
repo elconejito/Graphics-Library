@@ -84,9 +84,11 @@ class GraphicsController extends \BaseController {
         $save_name = $data['control_number'].'_'.preg_replace('/[^a-zA-Z0-9]+/', '_', $data['title']). '.' .Input::file('image')->getClientOriginalExtension();
         // in order, save the fullsize > main > thumbnail
         $image->save($save_path . 'fullsize/' . $save_name)
-                ->resize(750,500,true)
+                ->resize(750,500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->save($save_path . 'main/' . $save_name)
-                ->grab(250)
+                ->fit(250)
                 ->save($save_path . 'thumbnail/' . $save_name);
 
         // take the image object out of inputted data array and replace with new filename before saving
@@ -210,9 +212,11 @@ class GraphicsController extends \BaseController {
             $save_name = $data['control_number'].'_'.preg_replace('/[^a-zA-Z0-9]+/', '_', $data['title']). '.' .Input::file('image')->getClientOriginalExtension();
             // in order, save the fullsize > main > thumbnail
             $image->save($save_path . 'fullsize/' . $save_name)
-                    ->resize(750,500,true)
+                    ->resize(750,500, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
                     ->save($save_path . 'main/' . $save_name)
-                    ->grab(250)
+                    ->fit(250)
                     ->save($save_path . 'thumbnail/' . $save_name);
             
             // take the image object out of inputted data array and replace with new filename before saving
