@@ -39,7 +39,7 @@
                     <li class="list-group-item"><strong>Title</strong>: {{ $graphic->title }}</li>
                     <li class="list-group-item"><strong>Project</strong>: {{ link_to_action('ProjectsController@show', $graphic->project->name, array('id'=>$graphic->project->id)) }}</li>
                     <li class="list-group-item"><strong>Agency</strong>: {{ link_to_action('AgenciesController@show', $graphic->project->agency->name, ['id'=>$graphic->project->agency->id]) }}</li>
-                    <li class="list-group-item"><strong>Tags</strong>:</li>
+                    <li class="list-group-item"><strong>Tags</strong>: @foreach( $graphic->tags as $tag ){{ $tag->toHTML() }}@endforeach</li>
                 </ul>
             </div>
             <div class="panel panel-default">

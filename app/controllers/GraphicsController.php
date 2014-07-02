@@ -100,6 +100,12 @@ class GraphicsController extends \BaseController {
         // associate the graphic with a project
 	    $graphic->project()->associate($project);
 	    
+	    // add tags if any
+	    $tags = Tag::getTagsByString(explode(',', $data["hidden-tags-input"]));
+	    unset($data['hidden-tags-input']);     // remove this entry so it's not saved into the Model
+	    unset($data['tags']);     // remove this entry so it's not saved into the Model
+	    $graphic->tags()->sync($tags);
+	    
 	    // and save
 	    $graphic->save();
 	    
@@ -222,6 +228,12 @@ class GraphicsController extends \BaseController {
             // take the image object out of inputted data array and replace with new filename before saving
             $data["image"] = $save_name;
         }
+        
+        // add tags if any
+	    $tags = Tag::getTagsByString(explode(',', $data["hidden-tags-input"]));
+	    unset($data['hidden-tags-input']);     // remove this entry so it's not saved into the Model
+	    unset($data['tags']);     // remove this entry so it's not saved into the Model
+	    $graphic->tags()->sync($tags);
         
 	    $graphic->update($data);
 	    

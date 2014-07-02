@@ -82,4 +82,13 @@ class Graphic extends \Eloquent {
         ];
         return $buttons;
     }
+    
+    /**
+     * @return string
+     */
+    public function tagsToString() {
+        $tags = $this->tags->lists('name');
+        // return '["'.implode('","', $tags).'"]';
+        return ','.implode(',', $tags);
+    }
 }
