@@ -74,14 +74,6 @@ class Project extends \Eloquent {
     }
 
     /**
-     * @param array $strings
-     * @return mixed
-     */
-    public function getTagsByString(Array $strings) {
-        return Tag::whereIn('name', $strings)->get();
-    }
-
-    /**
      * @return string
      */
     public function tagsToString() {

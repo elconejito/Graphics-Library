@@ -63,7 +63,7 @@ class AgenciesController extends \BaseController {
 
         Agency::create($data);
 
-	    return Redirect::route('admin');
+	    return Redirect::route('agencies.index');
 	}
 
 	/**

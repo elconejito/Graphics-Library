@@ -32,7 +32,7 @@
                         @foreach ( $projects as $project )
                         <tr>
                             <td><a href="{{ action('ProjectsController@edit', ['id'=>$project->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                            <td>{{ $agencies->find($project->agency)->shortname }}</td>
+                            <td>{{ $project->agency->shortname }}</td>
                             <td>{{ link_to_action('ProjectsController@show', $project->name, ['id'=>$project->id]) }}</td>
                             <td>{{ $project->graphics()->count() }}</td>
                         </tr>

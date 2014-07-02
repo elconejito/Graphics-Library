@@ -27,4 +27,12 @@ class Tag extends \Eloquent {
     public function toHTML() {
         return '<span class="tm-tag"><span><a href="'.action('TagsController@show', $this->id).'">'.$this->name.'</a></span></span>';
     }
+    
+    /**
+     * @param array $strings
+     * @return mixed
+     */
+    public static function getTagsByString(Array $strings) {
+        return Tag::whereIn('name', $strings)->get();
+    }
 }

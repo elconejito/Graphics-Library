@@ -24,7 +24,7 @@ class ProjectsController extends \BaseController {
 	{
 	    $projects = Project::paginate(10);
 	    $agencies = Agency::all();
-
+	    // dd($projects);
         // add breadcrumb before showing the view
         Breadcrumbs::addCrumb('All Projects');
 
@@ -38,13 +38,14 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
+	    $project = new Project();
         $agencies = Agency::orderby('name')
             ->lists('name','id');
 
         Breadcrumbs::addCrumb('All Projects', action('ProjectsController@index'));
         Breadcrumbs::addCrumb('Add Project');
 
-        return View::make('projects.create', compact('agencies'));
+        return View::make('projects.create', compact('agencies','project'));
 	}
 
 	/**
@@ -82,10 +83,18 @@ class ProjectsController extends \BaseController {
         $agency = Agency::find($data['agency_id']);
         unset($data['agency_id']);     // remove this entry so it's not saved into the Model
         
-        // create the new Project pre-loaded with data from Input
+        // get tags if any
+	    $tags = Tag::getTagsByString(explode(',', $data["hidden-tags-input"]));
+	    unset($data['hidden-tags-input']);     // remove this entry so it's not saved into the Model
+	    unset($data['tags']);     // remove this entry so it's not saved into the Model
+	    
+	    // create the new Project
         $project = new Project($data);
-        // associate the project with an agency
+        
+	    // associate the project with an agency
 	    $project->agency()->associate($agency);
+	    // sync tags
+	    $project->tags()->sync($tags);
 	    
 	    // save the project
 	    $project->save();
@@ -169,7 +178,7 @@ class ProjectsController extends \BaseController {
 	    $project->agency()->associate($agency);
 	    
 	    // add tags if any
-	    $tags = $project->getTagsByString(explode(',', $data["hidden-tags-input"]));
+	    $tags = Tag::getTagsByString(explode(',', $data["hidden-tags-input"]));
 	    unset($data['hidden-tags-input']);     // remove this entry so it's not saved into the Model
 	    unset($data['tags']);     // remove this entry so it's not saved into the Model
 	    $project->tags()->sync($tags);

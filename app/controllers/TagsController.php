@@ -60,7 +60,7 @@ class TagsController extends \BaseController {
 	        return Redirect::back()->withErrors($validator)->withInput();
 	    }
 	    
-	    $data['name'] = Purifier::clean($data['name'],'text');
+	    $data['name'] = strtolower(Purifier::clean($data['name'],'text'));
 	    
         Tag::create($data);
 
@@ -122,7 +122,9 @@ class TagsController extends \BaseController {
         {
             return Redirect::back()->withErrors($validator)->withInput();
         }
-
+        
+        $data['name'] = strtolower(Purifier::clean($data['name'],'text'));
+        
         Tag::findOrFail($id)->update($data);
 
         return Redirect::route('tags.index')->with('message', 'The tag &quot;'.$data['name'].'&quot; has been updated.');
