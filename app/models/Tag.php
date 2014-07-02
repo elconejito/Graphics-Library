@@ -33,6 +33,12 @@ class Tag extends \Eloquent {
      * @return mixed
      */
     public static function getTagsByString(Array $strings) {
-        return Tag::whereIn('name', $strings)->get();
+        $return = array();
+        foreach ( $strings as $k => $string ) {
+            $return[] = Tag::firstOrCreate(['name' => strtolower($string)])->id;
+        }
+        return $return;
+        
+        
     }
 }

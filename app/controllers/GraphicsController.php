@@ -233,6 +233,7 @@ class GraphicsController extends \BaseController {
 	    $tags = Tag::getTagsByString(explode(',', $data["hidden-tags-input"]));
 	    unset($data['hidden-tags-input']);     // remove this entry so it's not saved into the Model
 	    unset($data['tags']);     // remove this entry so it's not saved into the Model
+	    // dd($tags);
 	    $graphic->tags()->sync($tags);
         
 	    $graphic->update($data);
